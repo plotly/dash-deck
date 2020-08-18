@@ -1,0 +1,13 @@
+Package: dashDeck
+Title: A Dash Component wrapping deck.gl
+Version: 0.0.1
+Description: A Dash Component wrapping deck.gl
+Depends: R (>= 3.0.2)
+Imports: 
+Suggests: 
+License: MIT + file LICENSE
+URL: https://github.com/plotly/dash-deck
+BugReports: https://github.com/plotly/dash-deck/issues
+Encoding: UTF-8
+LazyData: true
+KeepSource: true

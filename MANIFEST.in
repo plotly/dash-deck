@@ -1,0 +1,7 @@
+include dash_deck/dash_deck.min.js
+include dash_deck/dash_deck.min.js.map
+include dash_deck/metadata.json
+include dash_deck/package-info.json
+include README.md
+include LICENSE
+include package.json
