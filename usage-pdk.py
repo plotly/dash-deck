@@ -1,3 +1,6 @@
+"""
+Adapted from: https://pypi.org/project/pydeck/
+"""
 import os
 import json
 
@@ -9,20 +12,22 @@ import pydeck as pdk
 mapbox_api_token = os.getenv("MAPBOX_API_KEY")
 
 # 2014 locations of car accidents in the UK
-UK_ACCIDENTS_DATA = ('https://raw.githubusercontent.com/uber-common/'
-                     'deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv')
+UK_ACCIDENTS_DATA = (
+    "https://raw.githubusercontent.com/uber-common/"
+    "deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv"
+)
 
 # Define a layer to display on a map
 layer = pdk.Layer(
-    'HexagonLayer',
+    "HexagonLayer",
     UK_ACCIDENTS_DATA,
-    get_position=['lng', 'lat'],
+    get_position=["lng", "lat"],
     auto_highlight=True,
     elevation_scale=50,
     pickable=True,
     elevation_range=[0, 3000],
     extruded=True,
-    coverage=1
+    coverage=1,
 )
 
 # Set the viewport location
@@ -33,7 +38,7 @@ view_state = pdk.ViewState(
     min_zoom=5,
     max_zoom=15,
     pitch=40.5,
-    bearing=-27.36
+    bearing=-27.36,
 )
 
 # Render
@@ -43,13 +48,11 @@ r = pdk.Deck(layers=[layer], initial_view_state=view_state)
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    [
-        dash_deck.DeckGL(
-            json.loads(r.to_json()),
-            id="deck-gl",
-            mapboxApiAccessToken=mapbox_api_token
-        )
-    ]
+    dash_deck.DeckGL(
+        json.loads(r.to_json()),
+        id="deck-gl",
+        mapboxApiAccessToken=mapbox_api_token
+    )
 )
 
 
