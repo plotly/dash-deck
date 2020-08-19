@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-deckGL <- function(id=NULL, label=NULL, value=NULL) {
+deckGL <- function(json=NULL, id=NULL, mapboxApiAccessToken=NULL, clickEvent=NULL, clickInfo=NULL, hoverEvent=NULL, hoverInfo=NULL, dragStartEvent=NULL, dragStartInfo=NULL, dragEndEvent=NULL, dragEndInfo=NULL) {
     
-    props <- list(id=id, label=label, value=value)
+    props <- list(json=json, id=id, mapboxApiAccessToken=mapboxApiAccessToken, clickEvent=clickEvent, clickInfo=clickInfo, hoverEvent=hoverEvent, hoverInfo=hoverInfo, dragStartEvent=dragStartEvent, dragStartInfo=dragStartInfo, dragEndEvent=dragEndEvent, dragEndInfo=dragEndInfo)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ deckGL <- function(id=NULL, label=NULL, value=NULL) {
         props = props,
         type = 'DeckGL',
         namespace = 'dash_deck',
-        propNames = c('id', 'label', 'value'),
+        propNames = c('json', 'id', 'mapboxApiAccessToken', 'clickEvent', 'clickInfo', 'hoverEvent', 'hoverInfo', 'dragStartEvent', 'dragStartInfo', 'dragEndEvent', 'dragEndInfo'),
         package = 'dashDeck'
         )
 
