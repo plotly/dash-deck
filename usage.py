@@ -27,13 +27,7 @@ mapbox_api_token = os.getenv("REACT_APP_MAPBOX_API_KEY")
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    [
-        dash_deck.DeckGL(
-            data,
-            id="deck-gl",
-            mapboxApiAccessToken=mapbox_api_token
-        )
-    ]
+    [dash_deck.DeckGL(data, id="deck-gl", mapboxKey=mapbox_api_token)]
 )
 
 

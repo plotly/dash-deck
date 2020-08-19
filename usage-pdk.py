@@ -2,14 +2,13 @@
 Adapted from: https://pypi.org/project/pydeck/
 """
 import os
-import json
 
 import dash
 import dash_deck
 import dash_html_components as html
 import pydeck as pdk
 
-mapbox_api_token = os.getenv("MAPBOX_API_KEY")
+mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 # 2014 locations of car accidents in the UK
 UK_ACCIDENTS_DATA = (
@@ -42,17 +41,12 @@ view_state = pdk.ViewState(
 )
 
 # Render
-r = pdk.Deck(layers=[layer], initial_view_state=view_state)
-
+r = pdk.Deck(layers=[layer], initial_view_state=view_state, mapbox_key=mapbox_api_token)
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(
-        json.loads(r.to_json()),
-        id="deck-gl",
-        mapboxApiAccessToken=mapbox_api_token
-    )
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key)
 )
 
 
