@@ -22,7 +22,7 @@ const json = {
 
 
 // Copy paste your token here:
-const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoieGhsdWx1IiwiYSI6ImNrYW14cWVyMTFmNGIyeHBlbTZpb2toc28ifQ.JcTUr2qlBBEgEYQMtF_kXA";
+const MAPBOX_ACCESS_TOKEN = undefined;
 
 
 class App extends Component {
