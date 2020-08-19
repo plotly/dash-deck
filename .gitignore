@@ -272,3 +272,7 @@ bh_unicode_properties.cache
 # Sublime-github package stores a github token in this file
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
+
+dash_deck/*hmr.js
+dash_deck/*hmr.json
+dash_deck/output.js
