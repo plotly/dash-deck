@@ -24,7 +24,11 @@
   "author": "Xing Han Lu <xinghan@plot.ly>",
   "license": "MIT",
   "dependencies": {
-    "ramda": "^0.26.1"
+    "@loaders.gl/core": "^2.2.8",
+    "@loaders.gl/csv": "^2.2.8",
+    "deck.gl": "^8.2.5",
+    "ramda": "^0.26.1",
+    "react-map-gl": "^5.2.7"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
