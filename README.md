@@ -1,94 +1,152 @@
 # Dash Deck
 
-Dash Deck is a Dash component library.
+Dash Deck is Dash component that brings `deck.gl` to Dash. It lets you create interactive 3D maps and views directly in Dash, and supports `pydeck` and `JSON` input.
 
-Get started with:
-1. Install Dash and its dependencies: https://dash.plotly.com/installation
-2. Run `python usage.py`
-3. Visit http://localhost:8050 in your web browser
+## Getting started
+
+### Quickstart (Python)
+
+First install this library:
+```
+pip install dash-deck
+```
+
+then, define your map using the deck.gl JSON API:
+
+```python
+data = {
+    "description": "A minimal deck.gl example rendering a circle with text",
+    "initialViewState": {"longitude": -122.45, "latitude": 37.8, "zoom": 12},
+    "layers": [
+        {
+            "@@type": "TextLayer",
+            "data": [{"position": [-122.45, 37.8], "text": "Hello World"}],
+        },
+    ],
+}
+```
+
+finally, create your component and add it to your layout:
+
+```python
+import dash
+import dash_deck
+import dash_html_components as html
+
+deck_component = dash_deck.DeckGL(data=data, id="deck-gl")
+
+app = dash.Dash(__name__)
+app.layout = html.Div(deck_component)
+```
+
+For a full example, see `usage.py`. To find examples of the JSON API, see [the deck.gl playground](https://deck.gl/playground/).
+
+
+### Quickstart (R)
+
+(tbd)
+
+### `pydeck` integrations
+
+Make sure you have `pydeck` installed:
+```
+pip install pydeck
+```
+
+then, define a layer using `pdk` and run it:
+```python
+import pydeck as pdk
+
+layer = pdk.Layer(
+    "TextLayer",
+    [{"position": [-122.45, 37.8], "text": "Hello World"}]
+)
+
+# Render
+r = pdk.Deck(layers=[layer])
+```
+
+then, convert it to JSON and add it to your layout:
+
+```python
+import dash
+import dash_deck
+import dash_html_components as html
+
+deck_component = dash_deck.DeckGL(r.to_json(), id="deck-gl")
+
+app = dash.Dash(__name__)
+app.layout = html.Div(deck_component)
+```
+
+To learn how to use `pydeck`, read more in [the official documentations](https://pydeck.gl/). You can find a complete example in `usage-pdk.py`.
+
+### Mapbox tokens
+
+Make sure that you have created a [Mapbox access token](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/), and export it as an environment variable. For example, you can add the following line to your `.bashrc`:
+```
+export MAPBOX_ACCESS_TOKEN="pk.ey..."
+```
+
+Then, inside your app, define retrieve and define it as `mapbox_api_token`:
+```python
+import os
+mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
+```
+
+When you define your component, simply pass it to `DeckGL` as an argument:
+```python
+...
+
+r = pdk.Deck(...)
+
+deck_component = dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_api_token)
+
+...
+```
+
+
+## Running the demos
+
+First, make sure you clone the project:
+```
+git clone https://github.com/plotly/dash-deck.git
+cd dash-deck/
+```
+
+Create and activate a conda env:
+```
+conda create -n deck-demos python=3.7
+conda activate deck-demos
+```
+
+Or a venv (make sure your `python3` is 3.6+):
+```
+python3 -m venv venv
+source venv/bin/activate  # for Windows, use venv\Scripts\activate.bat
+```
+
+Install all the dev and demo requirements:
+
+```
+pip install -r requirements.txt
+pip install -r demos/requirements.txt
+```
+
+You can now run the demo you want to try (replace `<name>` with the layer type you want to try):
+```
+python demos/usage-<name>.py
+```
 
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-### Install dependencies
+## License
 
-If you have selected install_dependencies during the prompt, you can skip this part.
+Dash and Dash Deck are licensed under MIT. Please view LICENSE for more details.
 
-1. Install npm packages
-    ```
-    $ npm install
-    ```
-2. Create a virtual env and activate.
-    ```
-    $ virtualenv venv
-    $ . venv/bin/activate
-    ```
-    _Note: venv\Scripts\activate for windows_
+## Contact and Support
 
-3. Install python packages required to build components.
-    ```
-    $ pip install -r requirements.txt
-    ```
-4. Install the python packages for testing (optional)
-    ```
-    $ pip install -r tests/requirements.txt
-    ```
+If you are interested in supporting the development of this library, check out our [consulting & training page](https://plotly.com/consulting-and-oem/). For enterprise support and deployment, [contact us](https://plotly.com/contact-us).
 
-### Write your component code in `src/lib/components/DeckGL.react.js`.
-
-- The demo app is in `src/demo` and you will import your example component code into your demo app.
-- Test your code in a Python environment:
-    1. Build your code
-        ```
-        $ npm run build
-        ```
-    2. Run and modify the `usage.py` sample dash app:
-        ```
-        $ python usage.py
-        ```
-- Write tests for your component.
-    - A sample test is available in `tests/test_usage.py`, it will load `usage.py` and you can then automate interactions with selenium.
-    - Run the tests with `$ pytest tests`.
-    - The Dash team uses these types of integration tests extensively. Browse the Dash component code on GitHub for more examples of testing (e.g. https://github.com/plotly/dash-core-components)
-- Add custom styles to your component by putting your custom CSS files into your distribution folder (`dash_deck`).
-    - Make sure that they are referenced in `MANIFEST.in` so that they get properly included when you're ready to publish your component.
-    - Make sure the stylesheets are added to the `_css_dist` dict in `dash_deck/__init__.py` so dash will serve them automatically when the component suite is requested.
-- [Review your code](./review_checklist.md)
-
-### Create a production build and publish:
-
-1. Build your code:
-    ```
-    $ npm run build
-    ```
-2. Create a Python tarball
-    ```
-    $ python setup.py sdist
-    ```
-    This distribution tarball will get generated in the `dist/` folder
-
-3. Test your tarball by copying it into a new environment and installing it locally:
-    ```
-    $ pip install dash_deck-0.0.1.tar.gz
-    ```
-
-4. If it works, then you can publish the component to NPM and PyPI:
-    1. Publish on PyPI
-        ```
-        $ twine upload dist/*
-        ```
-    2. Cleanup the dist folder (optional)
-        ```
-        $ rm -rf dist
-        ```
-    3. Publish on NPM (Optional if chosen False in `publish_on_npm`)
-        ```
-        $ npm publish
-        ```
-        _Publishing your component to NPM will make the JavaScript bundles available on the unpkg CDN. By default, Dash serves the component library's CSS and JS locally, but if you choose to publish the package to NPM you can set `serve_locally` to `False` and you may see faster load times._
-
-5. Share your component with the community! https://community.plotly.com/c/dash
-    1. Publish this repository to GitHub
-    2. Tag your GitHub repository with the plotly-dash tag so that it appears here: https://github.com/topics/plotly-dash
-    3. Create a post in the Dash community forum: https://community.plotly.com/c/dash
