@@ -47,40 +47,40 @@ const jsonConverter = new JSONConverter({ configuration });
  */
 export default class DeckGL extends React.Component {
     render() {
-        let {data} = this.props;
-        const {id, mapboxKey} = this.props;
+      let {data} = this.props;
+      const {id, mapboxKey} = this.props;
 
-        let mapStyle = null;
+      // If data is a string, we need to convert it
+      // into the JSON format
+      if (typeof(data) === "string"){
+        data = JSON.parse(data);
+      }
+      
+      console.log("JSONCONVERTER", jsonConverter.convert(data));
+      // Now, we can convert the JSON document to a deck object
+      const deckProps = jsonConverter.convert(data);
+      
+      // Assign the ID to the deck object
+      deckProps.id = id;
 
-        // If data is a string, we need to convert it
-        // into the JSON format
-        if (typeof(data) === "string"){
-          data = JSON.parse(data);
-        }
-        
-        // Now, we can convert the JSON document to a deck object
-        const deckProps = jsonConverter.convert(data);
-        
-        // Assign the ID to the deck object
-        deckProps.id = id;
+      // Extract the map style from JSON document, since the map style 
+      // is sometimes located in data.views.length
+      if (!("mapStyle" in deckProps) && "views" in data && data.views.length > 0){
+        deckProps.mapStyle = data.views[0].mapStyle;
+        console.log("views", deckProps.mapStyle);
+      }
 
-        // Extract the map style from JSON document, since the map style 
-        // is not yet supported by @deck.gl/json
-        if ("views" in data && data.views.length > 0){
-          mapStyle = data.views[0].mapStyle;
-        }
-
-        return (
-            <Deck
-                onClick={(clickInfo, clickEvent) => this.props.setProps({clickInfo, clickEvent})}
-                {...deckProps}
-            >
-                <StaticMap 
-                  mapboxApiAccessToken={mapboxKey}
-                  mapStyle={mapStyle}
-                />
-            </Deck>
-        );
+      return (
+          <Deck
+              onClick={(clickInfo, clickEvent) => this.props.setProps({clickInfo, clickEvent})}
+              {...deckProps}
+          >
+              <StaticMap 
+                mapboxApiAccessToken={mapboxKey}
+                mapStyle={deckProps.mapStyle}
+              />
+          </Deck>
+      );
     }
 }
 
