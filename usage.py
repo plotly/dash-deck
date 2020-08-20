@@ -1,5 +1,3 @@
-import os
-
 import dash
 import dash_deck
 import dash_html_components as html
@@ -22,13 +20,9 @@ data = {
     ],
 }
 
-mapbox_api_token = os.getenv("REACT_APP_MAPBOX_API_KEY")
-
 app = dash.Dash(__name__)
 
-app.layout = html.Div(
-    [dash_deck.DeckGL(data, id="deck-gl", mapboxKey=mapbox_api_token)]
-)
+app.layout = html.Div(dash_deck.DeckGL(data, id="deck-gl"))
 
 
 if __name__ == "__main__":
