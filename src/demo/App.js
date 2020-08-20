@@ -15,10 +15,13 @@ json = { "description": "The deck.gl website hexagonlayer example in JSON format
 
 
 // Copy paste your token here:
-const MAPBOX_ACCESS_TOKEN = "pk.eyJ1IjoieGhsdWx1IiwiYSI6ImNrZTF1NG5yNzAyeTIzMnAwM295YjcxM2QifQ.GfaoGEx1qjMB_7PPG9HP3A";
+const MAPBOX_ACCESS_TOKEN = null;
 
 
 class App extends Component {
+    setProps(e) {
+        console.log(e);
+    }
     render() {
         return (
             <div>
