@@ -138,6 +138,17 @@ You can now run the demo you want to try (replace `<name>` with the layer type y
 python demos/usage-<name>.py
 ```
 
+## Tips and Advices
+
+### Change height and width
+
+To change `height` or `width`, ou need to specify a `"view"` dict or `pdk.View` when constructing your map dictionary or `pdk.Deck`. See `usage.py` and `usage-pdk.py` for examples on constructing a `View`.
+
+### Callbacks and events
+
+Various events are exposed as read-only props, and you can use them as `Input` or `State` to your callbacks. They are named `[click|hover|dragStart|dragEnd][Info|Event]`; the first part descirbes the gesture, and `Info` is the picking info describing the object being clicked and `Event` is the original gesture event (in JSON). You can read more about [`Info` in the deck.gl developer guide](https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object).
+
+
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md)
@@ -150,3 +161,6 @@ Dash and Dash Deck are licensed under MIT. Please view LICENSE for more details.
 
 If you are interested in supporting the development of this library, check out our [consulting & training page](https://plotly.com/consulting-and-oem/). For enterprise support and deployment, [contact us](https://plotly.com/contact-us).
 
+## References
+
+(TBD)

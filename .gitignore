@@ -279,3 +279,6 @@ dash_deck/output.js
 inst/deps/*hmr.js
 inst/deps/*hmr.json
 inst/deps/output.js
+
+demos/*.html
+demos/*.ipynb
