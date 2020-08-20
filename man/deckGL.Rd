@@ -25,37 +25,37 @@ pdk.Deck(...).to_json(). Both a Python dictionary and a JSON-string your map is 
 \item{mapboxKey}{Character. `mapboxKey` (text): You will need a mapbox token to use deck.gl. Please create a mapbox
 and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/}
 
-\item{clickEvent}{Named list. This prop is updated when an element in the map is clicked. This contains
+\item{clickEvent}{Named list. Read-only prop. This prop is updated when an element in the map is clicked. This contains
 the original gesture event (in JSON).}
 
-\item{clickInfo}{Named list. This prop is updated when an element in the map is clicked. This contains
+\item{clickInfo}{Named list. Read-only prop. This prop is updated when an element in the map is clicked. This contains
 the picking info describing the object being clicked.
 
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object}
 
-\item{hoverEvent}{Named list. This prop is updated when an element in the map is hovered. This contains
+\item{hoverEvent}{Named list. Read-only prop. This prop is updated when an element in the map is hovered. This contains
 the original gesture event (in JSON).}
 
-\item{hoverInfo}{Named list. This prop is updated when an element in the map is hovered. This contains
+\item{hoverInfo}{Named list. Read-only prop. This prop is updated when an element in the map is hovered. This contains
 the picking info describing the object being hovered.
 
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object}
 
-\item{dragStartEvent}{Named list. This prop is updated when the user starts dragging on the canvas. This contains
+\item{dragStartEvent}{Named list. Read-only prop. This prop is updated when the user starts dragging on the canvas. This contains
 the original gesture event (in JSON).}
 
-\item{dragStartInfo}{Named list. This prop is updated when the user starts dragging on the canvas. This contains
+\item{dragStartInfo}{Named list. Read-only prop. This prop is updated when the user starts dragging on the canvas. This contains
 the picking info describing the object being dragged.
 
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object}
 
-\item{dragEndEvent}{Named list. This prop is updated when the user releases from dragging the canvas. This contains
+\item{dragEndEvent}{Named list. Read-only prop. This prop is updated when the user releases from dragging the canvas. This contains
 the original gesture event (in JSON).}
 
-\item{dragEndInfo}{Named list. This prop is updated when the user releases from dragging the canvas. This contains
+\item{dragEndInfo}{Named list. Read-only prop. This prop is updated when the user releases from dragging the canvas. This contains
 the picking info describing the object being dragged.
 
 Complete description here:
