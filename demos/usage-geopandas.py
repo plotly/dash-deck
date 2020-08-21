@@ -39,9 +39,7 @@ r = pdk.Deck(layers, map_provider=None)
 
 app = dash.Dash(__name__)
 
-app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl")
-)
+app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl"))
 
 
 if __name__ == "__main__":

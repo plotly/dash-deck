@@ -17,9 +17,13 @@ mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 
 DATA_URL = "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/geojson/vancouver-blocks.json"
-LAND_COVER = [[[-123.0, 49.196], [-123.0, 49.324], [-123.306, 49.324], [-123.306, 49.196]]]
+LAND_COVER = [
+    [[-123.0, 49.196], [-123.0, 49.324], [-123.306, 49.324], [-123.306, 49.196]]
+]
 
-INITIAL_VIEW_STATE = pydeck.ViewState(latitude=49.254, longitude=-123.13, zoom=11, max_zoom=16, pitch=45, bearing=0)
+INITIAL_VIEW_STATE = pydeck.ViewState(
+    latitude=49.254, longitude=-123.13, zoom=11, max_zoom=16, pitch=45, bearing=0
+)
 
 polygon = pydeck.Layer(
     "PolygonLayer",
@@ -43,8 +47,11 @@ geojson = pydeck.Layer(
     get_line_color=[255, 255, 255],
 )
 
-r = pydeck.Deck(layers=[polygon, geojson], initial_view_state=INITIAL_VIEW_STATE, mapbox_key=mapbox_api_token)
-
+r = pydeck.Deck(
+    layers=[polygon, geojson],
+    initial_view_state=INITIAL_VIEW_STATE,
+    mapbox_key=mapbox_api_token,
+)
 
 
 app = dash.Dash(__name__)
