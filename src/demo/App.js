@@ -12,6 +12,13 @@ json = { "description": "The deck.gl website hexagonlayer example in JSON format
 // uncomment below to test strings
 // json = JSON.stringify(json);
 
+const tooltip = {
+    "html": "<b>Elevation Value:</b> {elevationValue}",
+    "style": {
+         "backgroundColor": "steelblue",
+         "color": "white"
+    }
+ };
 
 
 // Copy paste your token here:
@@ -21,6 +28,7 @@ const MAPBOX_ACCESS_TOKEN = null;
 class App extends Component {
     setProps(e) {
         console.log(e);
+        return e;
     }
     render() {
         return (
@@ -29,6 +37,7 @@ class App extends Component {
                 id={"simple-string"}
                 data={json}
                 mapboxKey={MAPBOX_ACCESS_TOKEN}
+                tooltip={tooltip}
             />
             </div>
         );

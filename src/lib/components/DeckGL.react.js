@@ -10,12 +10,13 @@ import {
   OrthographicView, 
   OrbitView
 } from '@deck.gl/core';
-
 import * as layers from "@deck.gl/layers";
 import * as aggregationLayers from "@deck.gl/aggregation-layers"
 import * as geoLayers from "@deck.gl/geo-layers";
 import * as meshLayers from "@deck.gl/mesh-layers";
 import PropTypes from 'prop-types';
+
+import makeTooltip from './tooltip';
 
 
 // CSV loader is needed to download and read CSV Files
@@ -48,7 +49,8 @@ const jsonConverter = new JSONConverter({ configuration });
 export default class DeckGL extends React.Component {
     render() {
       let {data} = this.props;
-      const {id, mapboxKey} = this.props;
+      const {id, mapboxKey, tooltip} = this.props;
+      const getTooltip = makeTooltip(tooltip);
 
       // If data is a string, we need to convert into JSON format
       if (typeof(data) === "string"){
@@ -83,6 +85,7 @@ export default class DeckGL extends React.Component {
               onDragStart={(dragStartInfo, dragStartEvent) => this.props.setProps({dragStartInfo, dragStartEvent})}
               onDragEnd={(dragEndInfo, dragEndEvent) => this.props.setProps({dragEndInfo, dragEndEvent})}
               onHover={(hoverInfo, hoverEvent) => this.props.setProps({hoverInfo, hoverEvent})}
+              getTooltip={getTooltip}
               {...deckProps}
           >
             {staticMap}
@@ -93,7 +96,8 @@ export default class DeckGL extends React.Component {
 
 DeckGL.defaultProps = {
     data: {},
-    mapboxKey: null
+    mapboxKey: null,
+    tooltip: false
 };
 
 DeckGL.propTypes = {
@@ -103,15 +107,21 @@ DeckGL.propTypes = {
      */
     data: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 
-
     /**
      * The ID used to identify this component in Dash callbacks.
      */
     id: PropTypes.string,
 
+    /**
+     * This can be a boolean value (e.g. True, False) to display the default tooltip.
+     * You can also give a dictionary specifying an `html` template and custom style using `css`. For more
+     * information about templating, see: https://pydeck.gl/tooltip.html
+     */
+    tooltip: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+
 
     /**
-     * `mapboxKey` (text): You will need a mapbox token to use deck.gl. Please create a mapbox
+     * You will need a mapbox token to use deck.gl. Please create a mapbox
      * and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
      */
     mapboxKey: PropTypes.string,
