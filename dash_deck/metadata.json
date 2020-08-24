@@ -30,12 +30,31 @@
         "required": false,
         "description": "The ID used to identify this component in Dash callbacks."
       },
+      "tooltip": {
+        "type": {
+          "name": "union",
+          "value": [
+            {
+              "name": "object"
+            },
+            {
+              "name": "bool"
+            }
+          ]
+        },
+        "required": false,
+        "description": "This can be a boolean value (e.g. True, False) to display the default tooltip.\nYou can also give a dictionary specifying an `html` template and custom style using `css`. For more\ninformation about templating, see: https://pydeck.gl/tooltip.html",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
       "mapboxKey": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": "`mapboxKey` (text): You will need a mapbox token to use deck.gl. Please create a mapbox\nand follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/",
+        "description": "You will need a mapbox token to use deck.gl. Please create a mapbox\nand follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/",
         "defaultValue": {
           "value": "null",
           "computed": false

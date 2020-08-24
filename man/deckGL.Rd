@@ -10,10 +10,10 @@ This component lets you visualizes PyDeck and deck/json files directly in Dash. 
 }
 
 \usage{
-deckGL(data=NULL, id=NULL, mapboxKey=NULL, clickEvent=NULL,
-clickInfo=NULL, hoverEvent=NULL, hoverInfo=NULL,
-dragStartEvent=NULL, dragStartInfo=NULL, dragEndEvent=NULL,
-dragEndInfo=NULL)
+deckGL(data=NULL, id=NULL, tooltip=NULL, mapboxKey=NULL,
+clickEvent=NULL, clickInfo=NULL, hoverEvent=NULL,
+hoverInfo=NULL, dragStartEvent=NULL, dragStartInfo=NULL,
+dragEndEvent=NULL, dragEndInfo=NULL)
 }
 
 \arguments{
@@ -22,7 +22,11 @@ pdk.Deck(...).to_json(). Both a Python dictionary and a JSON-string your map is 
 
 \item{id}{Character. The ID used to identify this component in Dash callbacks.}
 
-\item{mapboxKey}{Character. `mapboxKey` (text): You will need a mapbox token to use deck.gl. Please create a mapbox
+\item{tooltip}{Named list | logical. This can be a boolean value (e.g. True, False) to display the default tooltip.
+You can also give a dictionary specifying an `html` template and custom style using `css`. For more
+information about templating, see: https://pydeck.gl/tooltip.html}
+
+\item{mapboxKey}{Character. You will need a mapbox token to use deck.gl. Please create a mapbox
 and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/}
 
 \item{clickEvent}{Named list. Read-only prop. This prop is updated when an element in the map is clicked. This contains
