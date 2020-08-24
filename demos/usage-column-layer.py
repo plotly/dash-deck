@@ -54,7 +54,6 @@ tooltip = {
 r = pydeck.Deck(
     column_layer,
     initial_view_state=view,
-    tooltip=tooltip,
     map_style="mapbox://styles/mapbox/satellite-v9",
     mapbox_key=mapbox_api_token,
 )
@@ -62,7 +61,7 @@ r = pydeck.Deck(
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key)
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", tooltip=tooltip, mapboxKey=r.mapbox_key)
 )
 
 

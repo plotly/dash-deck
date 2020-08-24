@@ -49,14 +49,17 @@ view_state = pdk.ViewState(
 )
 
 # Render
-r = pdk.Deck(
-    layers=[layer], initial_view_state=view_state, tooltip={"text": "{name}\n{address}"}
-)
+r = pdk.Deck(layers=[layer], initial_view_state=view_state)
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(
+        r.to_json(),
+        id="deck-gl",
+        tooltip={"text": "{name}\n{address}"},
+        mapboxKey=mapbox_api_token,
+    )
 )
 
 

@@ -69,18 +69,15 @@ view_state = pdk.ViewState(
 TOOLTIP_TEXT = {
     "html": "{S000} jobs <br /> Home of commuter in red; work location in green"
 }
-r = pdk.Deck(
-    arc_layer,
-    initial_view_state=view_state,
-    tooltip=TOOLTIP_TEXT,
-    mapbox_key=mapbox_api_token,
-)
+r = pdk.Deck(arc_layer, initial_view_state=view_state, mapbox_key=mapbox_api_token,)
 
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key)
+    dash_deck.DeckGL(
+        r.to_json(), id="deck-gl", tooltip=TOOLTIP_TEXT, mapboxKey=r.mapbox_key
+    )
 )
 
 
