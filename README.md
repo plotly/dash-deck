@@ -108,6 +108,8 @@ deck_component = dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_ap
 
 ## Running the demos
 
+The Pydeck already created many amazing demos, which are shown in [their doc gallery](https://pydeck.gl/index.html#gallery). We simply ported them for Dash Deck. At the start of each `usage-<name>.py` file, you will be able to find the source to the original demo.
+
 First, make sure you clone the project:
 ```
 git clone https://github.com/plotly/dash-deck.git
@@ -148,6 +150,27 @@ To change `height` or `width`, ou need to specify a `"view"` dict or `pdk.View` 
 
 Various events are exposed as read-only props, and you can use them as `Input` or `State` to your callbacks. They are named `[click|hover|dragStart|dragEnd][Info|Event]`; the first part descirbes the gesture, and `Info` is the picking info describing the object being clicked and `Event` is the original gesture event (in JSON). You can read more about [`Info` in the deck.gl developer guide](https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object).
 
+### Using the tooltip
+
+The `pydeck` tooltip can be used in Dash Deck. Moreover, rather than passing it to `pdk.Deck`, you will need to pass it to `dash_deck.DeckGL`:
+```python
+deck_component = dash_deck.DeckGL(
+    r.to_json(), id="deck-gl", tooltip=True
+)
+```
+
+You can also customize your tooltip:
+```python
+deck_component = dash_deck.DeckGL(
+    r.to_json(), 
+    id="deck-gl", 
+    tooltip={
+        "html": ...,
+        "style": ...
+    }
+)
+```
+To learn more about tooltips, please check out the [section in the Pydeck docs](https://pydeck.gl/tooltip.html). You will also be able to find some `demos` with custom tooltips.
 
 ## Contributing
 

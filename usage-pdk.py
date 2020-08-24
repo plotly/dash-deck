@@ -42,7 +42,7 @@ view_state = pdk.ViewState(
     bearing=-27.36,
 )
 
-map_view = pdk.View("MapView", width="75%", height="600px")
+map_view = pdk.View("MapView", width="75%", height="600px", controller=True)
 
 # Render
 r = pdk.Deck(
@@ -55,7 +55,7 @@ r = pdk.Deck(
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key)
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", tooltip=True, mapboxKey=r.mapbox_key)
 )
 
 
