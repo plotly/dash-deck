@@ -57,8 +57,12 @@ def calculate_elevation(val):
 df["coordinates"] = json["features"].apply(lambda row: row["geometry"]["coordinates"])
 df["valuePerSqm"] = json["features"].apply(lambda row: row["properties"]["valuePerSqm"])
 df["growth"] = json["features"].apply(lambda row: row["properties"]["growth"])
-df["elevation"] = json["features"].apply(lambda row: calculate_elevation(row["properties"]["valuePerSqm"]))
-df["fill_color"] = json["features"].apply(lambda row: color_scale(row["properties"]["growth"]))
+df["elevation"] = json["features"].apply(
+    lambda row: calculate_elevation(row["properties"]["valuePerSqm"])
+)
+df["fill_color"] = json["features"].apply(
+    lambda row: color_scale(row["properties"]["growth"])
+)
 
 # Add sunlight shadow to the polygons
 sunlight = {
@@ -79,10 +83,19 @@ lighting_effect = {
 }
 
 view_state = pdk.ViewState(
-    **{"latitude": 49.254, "longitude": -123.13, "zoom": 11, "maxZoom": 16, "pitch": 45, "bearing": 0}
+    **{
+        "latitude": 49.254,
+        "longitude": -123.13,
+        "zoom": 11,
+        "maxZoom": 16,
+        "pitch": 45,
+        "bearing": 0,
+    }
 )
 
-LAND_COVER = [[[-123.0, 49.196], [-123.0, 49.324], [-123.306, 49.324], [-123.306, 49.196]]]
+LAND_COVER = [
+    [[-123.0, 49.196], [-123.0, 49.324], [-123.306, 49.324], [-123.306, 49.196]]
+]
 
 polygon_layer = pdk.Layer(
     "PolygonLayer",
@@ -110,7 +123,9 @@ polygon_layer = pdk.Layer(
     pickable=True,
 )
 
-tooltip = {"html": "<b>Value per Square Meter:</b> {valuePerSqm} <br /><b>Growth rate:</b> {growth}"}
+tooltip = {
+    "html": "<b>Value per Square Meter:</b> {valuePerSqm} <br /><b>Growth rate:</b> {growth}"
+}
 
 r = pdk.Deck(
     polygon_layer,
@@ -123,8 +138,9 @@ r = pdk.Deck(
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl",
-    tooltip=tooltip, mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(
+        r.to_json(), id="deck-gl", tooltip=tooltip, mapboxKey=mapbox_api_token
+    )
 )
 
 

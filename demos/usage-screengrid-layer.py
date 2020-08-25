@@ -15,9 +15,7 @@ import pandas as pd
 
 mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
-SCREEN_GRID_LAYER_DATA = (
-    "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf-bike-parking.json"  # noqa
-)
+SCREEN_GRID_LAYER_DATA = "https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf-bike-parking.json"  # noqa
 df = pd.read_json(SCREEN_GRID_LAYER_DATA)
 
 # Define a layer to display on a map
@@ -40,7 +38,9 @@ layer = pdk.Layer(
 )
 
 # Set the viewport location
-view_state = pdk.ViewState(latitude=37.7749295, longitude=-122.4194155, zoom=11, bearing=0, pitch=0)
+view_state = pdk.ViewState(
+    latitude=37.7749295, longitude=-122.4194155, zoom=11, bearing=0, pitch=0
+)
 
 # Render
 r = pdk.Deck(layers=[layer], initial_view_state=view_state)

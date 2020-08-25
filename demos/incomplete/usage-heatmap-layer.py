@@ -21,8 +21,12 @@ import pandas as pd
 mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 
-CATTLE_DATA = "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/nm_cattle.csv"
-POULTRY_DATA = "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/nm_chickens.csv"
+CATTLE_DATA = (
+    "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/nm_cattle.csv"
+)
+POULTRY_DATA = (
+    "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/nm_chickens.csv"
+)
 
 
 HEADER = ["lng", "lat", "weight"]
@@ -69,16 +73,19 @@ poultry = pdk.Layer(
 )
 
 
-r = pdk.Deck(
-    layers=[cattle, poultry],
-    initial_view_state=view,
-)
+r = pdk.Deck(layers=[cattle, poultry], initial_view_state=view,)
 
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl",
-    tooltip={"text": "Concentration of cattle in blue, concentration of poultry in orange"}, mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(
+        r.to_json(),
+        id="deck-gl",
+        tooltip={
+            "text": "Concentration of cattle in blue, concentration of poultry in orange"
+        },
+        mapboxKey=mapbox_api_token,
+    )
 )
 
 

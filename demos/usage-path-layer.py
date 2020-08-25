@@ -47,7 +47,12 @@ r = pdk.Deck(layers=[layer], initial_view_state=view_state)
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", tooltip={"text": "{name}"}, mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(
+        r.to_json(),
+        id="deck-gl",
+        tooltip={"text": "{name}"},
+        mapboxKey=mapbox_api_token,
+    )
 )
 
 

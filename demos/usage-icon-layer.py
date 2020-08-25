@@ -18,7 +18,9 @@ mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 # Data from OpenStreetMap, accessed via osmpy
 DATA_URL = "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/biergartens.json"
-ICON_URL = "https://upload.wikimedia.org/wikipedia/commons/c/c4/Projet_bi%C3%A8re_logo_v2.png"
+ICON_URL = (
+    "https://upload.wikimedia.org/wikipedia/commons/c/c4/Projet_bi%C3%A8re_logo_v2.png"
+)
 
 icon_data = {
     # Icon from Wikimedia, used the Creative Commons Attribution-Share Alike 3.0
@@ -52,7 +54,12 @@ r = pdk.Deck(layers=[icon_layer], initial_view_state=view_state)
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", tooltip={"text": "{tags}"}, mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(
+        r.to_json(),
+        id="deck-gl",
+        tooltip={"text": "{tags}"},
+        mapboxKey=mapbox_api_token,
+    )
 )
 
 

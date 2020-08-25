@@ -21,7 +21,9 @@ DATA_URL = {
     "FLIGHT_PATHS": "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/line/heathrow-flights.json",  # noqa
 }
 
-INITIAL_VIEW_STATE = pdk.ViewState(latitude=47.65, longitude=7, zoom=4.5, max_zoom=16, pitch=50, bearing=0)
+INITIAL_VIEW_STATE = pdk.ViewState(
+    latitude=47.65, longitude=7, zoom=4.5, max_zoom=16, pitch=50, bearing=0
+)
 
 # RGBA value generated in Javascript by deck.gl's Javascript expression parser
 GET_COLOR_JS = [
@@ -62,7 +64,9 @@ r = pdk.Deck(layers=layers, initial_view_state=INITIAL_VIEW_STATE)
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", tooltip=True, mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(
+        r.to_json(), id="deck-gl", tooltip=True, mapboxKey=mapbox_api_token
+    )
 )
 
 

@@ -34,11 +34,12 @@ point_cloud_layer = pydeck.Layer(
     point_size=3,
 )
 
-view_state = pydeck.ViewState(target=target, controller=True, rotation_x=15, rotation_orbit=30, zoom=5.3)
+view_state = pydeck.ViewState(
+    target=target, controller=True, rotation_x=15, rotation_orbit=30, zoom=5.3
+)
 view = pydeck.View(type="OrbitView", controller=True)
 
 r = pydeck.Deck(point_cloud_layer, initial_view_state=view_state, views=[view])
-
 
 
 app = dash.Dash(__name__)
