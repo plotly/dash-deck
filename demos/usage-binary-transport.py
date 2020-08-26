@@ -24,7 +24,6 @@ mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 NODES_URL = "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/social_nodes.csv"
 
 
-
 def generate_graph_data(num_nodes, random_seed):
     """Generates a graph of 10k nodes with a 3D force layout
 
@@ -44,7 +43,9 @@ def generate_graph_data(num_nodes, random_seed):
 
 def make_renderer(nodes, use_binary_transport=False):
     """Creates the pydeck visualization for rendering"""
-    view_state = pydeck.ViewState(offset=[0, 0], latitude=None, longitude=None, bearing=None, pitch=None, zoom=10,)
+    view_state = pydeck.ViewState(
+        offset=[0, 0], latitude=None, longitude=None, bearing=None, pitch=None, zoom=10,
+    )
 
     views = [pydeck.View(type="OrbitView", controller=True)]
 
@@ -62,7 +63,12 @@ def make_renderer(nodes, use_binary_transport=False):
         radius=50,
     )
 
-    return pydeck.Deck(layers=[nodes_layer], initial_view_state=view_state, views=views, map_provider=None)
+    return pydeck.Deck(
+        layers=[nodes_layer],
+        initial_view_state=view_state,
+        views=views,
+        map_provider=None,
+    )
 
 
 nodes = pd.read_csv(NODES_URL)
@@ -82,10 +88,12 @@ del nodes["z"]
 del nodes["group"]
 
 r = make_renderer(nodes, use_binary_transport=False)
-    
+
 app = dash.Dash(__name__)
 
-app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl", style={"background-color": "charcoal"}))
+app.layout = html.Div(
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", style={"background-color": "charcoal"})
+)
 
 
 if __name__ == "__main__":
