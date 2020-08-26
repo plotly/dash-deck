@@ -44,7 +44,7 @@ r = pdk.Deck(terrain_layer, initial_view_state=view_state)
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=MAPBOX_API_KEY)
 )
 
 
