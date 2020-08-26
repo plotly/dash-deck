@@ -10,10 +10,11 @@ This component lets you visualizes PyDeck and deck/json files directly in Dash. 
 }
 
 \usage{
-deckGL(data=NULL, id=NULL, enableEvents=NULL, tooltip=NULL,
-mapboxKey=NULL, clickEvent=NULL, clickInfo=NULL,
-hoverEvent=NULL, hoverInfo=NULL, dragStartEvent=NULL,
-dragStartInfo=NULL, dragEndEvent=NULL, dragEndInfo=NULL)
+deckGL(data=NULL, id=NULL, style=NULL, enableEvents=NULL,
+tooltip=NULL, mapboxKey=NULL, clickEvent=NULL,
+clickInfo=NULL, hoverEvent=NULL, hoverInfo=NULL,
+dragStartEvent=NULL, dragStartInfo=NULL, dragEndEvent=NULL,
+dragEndInfo=NULL)
 }
 
 \arguments{
@@ -21,6 +22,8 @@ dragStartInfo=NULL, dragEndEvent=NULL, dragEndInfo=NULL)
 `pdk.Deck(...).to_json()`. Both a Python dictionary and a JSON-string your map is accepted.}
 
 \item{id}{Character. The ID used to identify this component in Dash callbacks.}
+
+\item{style}{Named list. Custom CSS for your map. This is useful for changing the height, width, and sometimes the background color.}
 
 \item{enableEvents}{List of characters | logical. Either a boolean indicating if all event callbacks should be enabled, or a list of strings
 indicating which ones should be used. If it's a list, you will need to specify one of the

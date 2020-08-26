@@ -43,6 +43,17 @@
         "required": false,
         "description": "The ID used to identify this component in Dash callbacks."
       },
+      "style": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Custom CSS for your map. This is useful for changing the height, width, and sometimes the background color.",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
       "enableEvents": {
         "type": {
           "name": "union",
