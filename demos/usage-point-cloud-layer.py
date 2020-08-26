@@ -45,7 +45,7 @@ r = pydeck.Deck(point_cloud_layer, initial_view_state=view_state, views=[view])
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_api_token)
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", style={"background-color": "#add8e6"})
 )
 
 
