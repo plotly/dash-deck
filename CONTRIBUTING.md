@@ -81,7 +81,7 @@ pytest tests
 
 ### Mapbox in CircleCI
 
-Many rendering tests will try to render maps by retrieving them using mapbox tokens. To ensure that the mapbox token is correct, please make sure that an environment variable called `MAPBOX_API_TOKEN` is defined in [the project settings](https://app.circleci.com/settings/project/github/plotly/dash-deck/environment-variables) (this link is only accessible if you are a Plotly organization member). The value of the environment variable can be found in your [mapbox account](https://account.mapbox.com/).
+Many rendering tests will try to render maps by retrieving them using mapbox tokens. To ensure that the mapbox token is correct, please make sure that an environment variable called `MAPBOX_ACCESS_TOKEN` is defined in [the project settings](https://app.circleci.com/settings/project/github/plotly/dash-deck/environment-variables) (this link is only accessible if you are a Plotly organization member). The value of the environment variable can be found in your [mapbox account](https://account.mapbox.com/).
 
 ### Percy
 
