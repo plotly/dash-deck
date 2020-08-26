@@ -80,6 +80,16 @@ jobs:
                     black tests --check
                 when: always
 
+            - run:
+                name: Run tests
+                command: |
+                    . venv/bin/activate
+                    pytest tests
+                when: always
+
+            - store_artifacts:
+                path: /tmp/dash_artifacts
+
     "python-3.7":
         <<: *test-template
         docker:
