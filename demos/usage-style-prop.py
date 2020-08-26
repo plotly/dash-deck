@@ -47,29 +47,22 @@ r = pdk.Deck(
     layers=[layer], initial_view_state=view_state, mapbox_key=mapbox_api_token,
 )
 
-deck_style = {
-    "width": "58vw",
-    "height": "75vh",
-    "display": "inline-block",
-    "position": "relative",
-}
-
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
     [
-        html.Div(
-            dash_deck.DeckGL(
-                r.to_json(), id="deck-gl", tooltip=True, mapboxKey=r.mapbox_key
-            ),
-            style=deck_style,
+        dash_deck.DeckGL(
+            r.to_json(),
+            id="deck-gl",
+            tooltip=True,
+            mapboxKey=r.mapbox_key,
+            style={"width": "55vw", "height": "75vh"},
         ),
         # Random Red Rectangle float on the right side
         html.Div(
             style={
                 "width": "40vw",
                 "height": "75vh",
-                "display": "inline-block",
                 "background-color": "red",
                 "float": "right",
             }
