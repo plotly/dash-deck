@@ -32,15 +32,14 @@ class App extends Component {
     }
     render() {
         return (
-            <div>
             <DeckGL
                 id={"simple-string"}
                 data={json}
                 mapboxKey={MAPBOX_ACCESS_TOKEN}
                 tooltip={tooltip}
+                style={{"height": "75vh"}}
                 enableEvents={["click"]}
             />
-            </div>
         );
     }
 }
