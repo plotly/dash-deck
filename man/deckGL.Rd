@@ -10,10 +10,10 @@ This component lets you visualizes PyDeck and deck/json files directly in Dash. 
 }
 
 \usage{
-deckGL(data=NULL, id=NULL, tooltip=NULL, mapboxKey=NULL,
-clickEvent=NULL, clickInfo=NULL, hoverEvent=NULL,
-hoverInfo=NULL, dragStartEvent=NULL, dragStartInfo=NULL,
-dragEndEvent=NULL, dragEndInfo=NULL)
+deckGL(data=NULL, id=NULL, enableEvents=NULL, tooltip=NULL,
+mapboxKey=NULL, clickEvent=NULL, clickInfo=NULL,
+hoverEvent=NULL, hoverInfo=NULL, dragStartEvent=NULL,
+dragStartInfo=NULL, dragEndEvent=NULL, dragEndInfo=NULL)
 }
 
 \arguments{
@@ -22,6 +22,10 @@ pdk.Deck(...).to_json(). Both a Python dictionary and a JSON-string your map is 
 
 \item{id}{Character. The ID used to identify this component in Dash callbacks.}
 
+\item{enableEvents}{List of characters | logical. Either a boolean indicating if all event callbacks should be enabled, or a list of strings
+indicating which ones should be used. If it's a list, you will need to specify one of the
+following gestures: click, dragStart, dragEnd, hover.}
+
 \item{tooltip}{Named list | logical. This can be a boolean value (e.g. True, False) to display the default tooltip.
 You can also give a dictionary specifying an `html` template and custom style using `css`. For more
 information about templating, see: https://pydeck.gl/tooltip.html}
@@ -29,37 +33,45 @@ information about templating, see: https://pydeck.gl/tooltip.html}
 \item{mapboxKey}{Character. You will need a mapbox token to use deck.gl. Please create a mapbox
 and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/}
 
-\item{clickEvent}{Named list. Read-only prop. This prop is updated when an element in the map is clicked. This contains
+\item{clickEvent}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when an element in the map is clicked. This contains
 the original gesture event (in JSON).}
 
-\item{clickInfo}{Named list. Read-only prop. This prop is updated when an element in the map is clicked. This contains
+\item{clickInfo}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when an element in the map is clicked. This contains
 the picking info describing the object being clicked.
 
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object}
 
-\item{hoverEvent}{Named list. Read-only prop. This prop is updated when an element in the map is hovered. This contains
+\item{hoverEvent}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when an element in the map is hovered. This contains
 the original gesture event (in JSON).}
 
-\item{hoverInfo}{Named list. Read-only prop. This prop is updated when an element in the map is hovered. This contains
+\item{hoverInfo}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when an element in the map is hovered. This contains
 the picking info describing the object being hovered.
 
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object}
 
-\item{dragStartEvent}{Named list. Read-only prop. This prop is updated when the user starts dragging on the canvas. This contains
+\item{dragStartEvent}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type. This prop is updated when the user starts dragging on the canvas. This contains
 the original gesture event (in JSON).}
 
-\item{dragStartInfo}{Named list. Read-only prop. This prop is updated when the user starts dragging on the canvas. This contains
+\item{dragStartInfo}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when the user starts dragging on the canvas. This contains
 the picking info describing the object being dragged.
 
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object}
 
-\item{dragEndEvent}{Named list. Read-only prop. This prop is updated when the user releases from dragging the canvas. This contains
+\item{dragEndEvent}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when the user releases from dragging the canvas. This contains
 the original gesture event (in JSON).}
 
-\item{dragEndInfo}{Named list. Read-only prop. This prop is updated when the user releases from dragging the canvas. This contains
+\item{dragEndInfo}{Named list. Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+ This prop is updated when the user releases from dragging the canvas. This contains
 the picking info describing the object being dragged.
 
 Complete description here:
