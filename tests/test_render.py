@@ -1,7 +1,20 @@
 import os
 import time
+import warnings
+
 
 from dash.testing.application_runners import import_app
+
+
+def take_snapshot(dash_duo, name):
+    target = "/tmp/dash_artifacts" if not dash_duo._is_windows() else os.getenv("TEMP")
+    try:
+        os.makedirs(target, exist_ok=True)
+    except OSError:
+        warnings.warn("Unable to create the target directory", OSError)
+
+    dash_duo.driver.save_screenshot("{}/{}.png".format(target, name))
+
 
 names = ["usage", "usage-pdk"] + [
     "demos." + n.replace(".py", "") for n in os.listdir("./demos") if ".py" in n
@@ -14,7 +27,7 @@ def build_test(name, sleep=5):
         dash_duo.start_server(app)
         dash_duo.wait_for_element("canvas")
         time.sleep(sleep)
-        dash_duo.take_snapshot(name + ".py")
+        take_snapshot(dash_duo, name.replace("demos.", ""))
 
     return test_fn
 
