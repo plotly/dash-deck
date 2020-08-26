@@ -105,7 +105,7 @@ r = pdk.Deck(
 app = dash.Dash(__name__)
 
 app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key)
+    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key, tooltip=True)
 )
 
 

@@ -18,6 +18,7 @@ data = {
             "data": [{"position": [-122.45, 37.8], "text": "Hello World"}],
         },
     ],
+    "views": [{"@@type": "MapView", "width": "75%", "height": "600px"}],
 }
 
 app = dash.Dash(__name__)

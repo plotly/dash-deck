@@ -42,10 +42,16 @@ view_state = pdk.ViewState(
     bearing=-27.36,
 )
 
+map_view = pdk.View("MapView", width="75%", height="600px", controller=True)
+
 # Render
 r = pdk.Deck(
-    layers=[layer], initial_view_state=view_state, mapbox_key=mapbox_api_token,
+    layers=[layer],
+    initial_view_state=view_state,
+    mapbox_key=mapbox_api_token,
+    views=[map_view],
 )
+
 
 app = dash.Dash(__name__)
 
