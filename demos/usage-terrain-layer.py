@@ -12,10 +12,7 @@ import dash_deck
 import dash_html_components as html
 import pydeck as pdk
 
-mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
-
-# Import Mapbox API Key from environment
-MAPBOX_API_KEY = os.environ["MAPBOX_API_KEY"]
+MAPBOX_API_KEY = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 # AWS Open Data Terrain Tiles
 TERRAIN_IMAGE = (
