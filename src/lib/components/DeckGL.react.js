@@ -16,7 +16,8 @@ import * as geoLayers from "@deck.gl/geo-layers";
 import * as meshLayers from "@deck.gl/mesh-layers";
 import PropTypes from 'prop-types';
 
-import makeTooltip from './tooltip';
+import makeTooltip from '../tooltip';
+import { prop } from 'ramda';
 
 
 // CSV loader is needed to download and read CSV Files
@@ -47,57 +48,101 @@ const jsonConverter = new JSONConverter({ configuration });
  * hover and drag) inside callbacks.
  */
 export default class DeckGL extends React.Component {
-    render() {
-      let {data} = this.props;
-      const {id, mapboxKey, tooltip} = this.props;
-      const getTooltip = makeTooltip(tooltip);
+  safeSetProps(events){
+    // This method sanitizes the info and event objects that are
+    // output by onClick, onHover, etc. Then, it proceeds to call setProps.
+    const propsToClean = ["layer", "target", "rootElement"];
 
-      // If data is a string, we need to convert into JSON format
-      if (typeof(data) === "string"){
-        data = JSON.parse(data);
-      }
-      // Now, we can convert the JSON document to a deck object
-      const deckProps = jsonConverter.convert(data);
+    Object.keys(events).map(key => {
+      const e = events[key];
+      // Cleaning starts here:
+      propsToClean.map(prop => {
+        if (prop in e && e[prop] !== null){
+          e[prop] = e[prop].toString();
+        }
+      })
+    })
 
-      // Assign the ID to the deck object
-      deckProps.id = id;
-
-      // Extract the map style from JSON document, since the map style 
-      // is sometimes located in data.views.length
-      if (!("mapStyle" in deckProps) && "views" in data && data.views.length > 0){
-        deckProps.mapStyle = data.views[0].mapStyle;
-      }
-
-      // Only render static map if a mapbox token was given
-      let staticMap;
-      if (mapboxKey !== null){
-        staticMap = <StaticMap
-          mapboxApiAccessToken={mapboxKey}
-          mapStyle={deckProps.mapStyle}
-        />
-      } else {
-        staticMap = null;
-      }
-
-      return (
-          <Deck
-              onClick={(clickInfo, clickEvent) => this.props.setProps({clickInfo, clickEvent})}
-              onDragStart={(dragStartInfo, dragStartEvent) => this.props.setProps({dragStartInfo, dragStartEvent})}
-              onDragEnd={(dragEndInfo, dragEndEvent) => this.props.setProps({dragEndInfo, dragEndEvent})}
-              onHover={(hoverInfo, hoverEvent) => this.props.setProps({hoverInfo, hoverEvent})}
-              getTooltip={getTooltip}
-              {...deckProps}
-          >
-            {staticMap}
-          </Deck>
+    if ('setProps' in this.props){
+      this.props.setProps(events);
+    } else {
+      console.warn(
+        "setProps is not a function of this.props, as a result the following object was not updated:", 
+        events,
       );
     }
+  }
+
+  render() {
+    let {enableEvents, data} = this.props;
+    const {id, mapboxKey, tooltip} = this.props;
+    const getTooltip = makeTooltip(tooltip);
+
+    // ******* PARSE AND CONVERT JSON *******
+    // If data is a string, we need to convert into JSON format
+    if (typeof(data) === "string"){
+      data = JSON.parse(data);
+    }
+    // Now, we can convert the JSON document to a deck object
+    const deckProps = jsonConverter.convert(data);
+
+    // ******** UPDATE DECK PROPS ********
+    // Assign the ID to the deck object
+    deckProps.id = id;
+    // Extract the map style from JSON document, since the map style 
+    // is sometimes located in data.views.length
+    if (!("mapStyle" in deckProps) && "views" in data && data.views.length > 0){
+      deckProps.mapStyle = data.views[0].mapStyle;
+    }
+
+    // ******** STATIC MAP ******** 
+    // Only render static map if a mapbox token was given
+    let staticMap;
+    if (mapboxKey !== null){
+      staticMap = <StaticMap
+        mapboxApiAccessToken={mapboxKey}
+        mapStyle={deckProps.mapStyle}
+      />
+    } else {
+      staticMap = null;
+    }
+
+    // ******** EVENT CALLBACKS ********
+    // First, convert enableEvents to list if it was a boolean
+    if (enableEvents === true){
+      enableEvents = ['click', 'dragStart', 'dragEnd', 'hover'];
+    }
+    else if (enableEvents === false){
+      enableEvents = [];
+    }
+    // Now, construct the respective functions
+    const clickFn = (info, e) => this.safeSetProps({clickInfo: info, clickEvent: e});
+    const dragStartFn = (info, e) => this.safeSetProps({dragStartInfo: info, dragStartEvent: e});
+    const dragEndFn = (info, e) => this.safeSetProps({dragEndInfo: info, dragEndEvent: e});
+    const hoverFn = (info, e) => this.safeSetProps({hoverInfo: info, hoverEvent: e});
+
+    // Finally, assign them as prop to deckProps
+    deckProps.onClick = enableEvents.includes("click") ? clickFn: null;
+    deckProps.onDragStart = enableEvents.includes("dragStart") ? dragStartFn: null;
+    deckProps.onDragEnd = enableEvents.includes("dragEnd") ? dragEndFn: null;
+    deckProps.onHover = enableEvents.includes("hover") ? hoverFn: null;
+
+    return (
+        <Deck
+            getTooltip={getTooltip}
+            {...deckProps}
+        >
+          {staticMap}
+        </Deck>
+    );
+  }
 }
 
 DeckGL.defaultProps = {
     data: {},
     mapboxKey: null,
-    tooltip: false
+    tooltip: false,
+    enableEvents: false
 };
 
 DeckGL.propTypes = {
@@ -111,6 +156,15 @@ DeckGL.propTypes = {
      * The ID used to identify this component in Dash callbacks.
      */
     id: PropTypes.string,
+
+    /**
+     * Either a boolean indicating if all event callbacks should be enabled, or a list of strings
+     * indicating which ones should be used. If it's a list, you will need to specify one of the
+     * following gestures: click, dragStart, dragEnd, hover.
+     */
+    enableEvents: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.string), PropTypes.bool
+    ]),
 
     /**
      * This can be a boolean value (e.g. True, False) to display the default tooltip.
@@ -128,14 +182,16 @@ DeckGL.propTypes = {
 
 
     /**
-     * Read-only prop. This prop is updated when an element in the map is clicked. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when an element in the map is clicked. This contains
      * the original gesture event (in JSON).
      */
     clickEvent: PropTypes.object,
 
 
     /**
-     * Read-only prop. This prop is updated when an element in the map is clicked. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when an element in the map is clicked. This contains
      * the picking info describing the object being clicked.
      * 
      * Complete description here:
@@ -145,14 +201,16 @@ DeckGL.propTypes = {
 
 
     /**
-     * Read-only prop. This prop is updated when an element in the map is hovered. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when an element in the map is hovered. This contains
      * the original gesture event (in JSON).
      */
     hoverEvent: PropTypes.object,
 
 
     /**
-     * Read-only prop. This prop is updated when an element in the map is hovered. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when an element in the map is hovered. This contains
      * the picking info describing the object being hovered.
      * 
      * Complete description here:
@@ -161,14 +219,16 @@ DeckGL.propTypes = {
     hoverInfo: PropTypes.object,
 
     /**
-     * Read-only prop. This prop is updated when the user starts dragging on the canvas. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type. This prop is updated when the user starts dragging on the canvas. This contains
      * the original gesture event (in JSON).
      */
     dragStartEvent: PropTypes.object,
 
 
     /**
-     * Read-only prop. This prop is updated when the user starts dragging on the canvas. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when the user starts dragging on the canvas. This contains
      * the picking info describing the object being dragged.
      * 
      * Complete description here:
@@ -178,14 +238,16 @@ DeckGL.propTypes = {
 
 
     /**
-     * Read-only prop. This prop is updated when the user releases from dragging the canvas. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when the user releases from dragging the canvas. This contains
      * the original gesture event (in JSON).
      */
     dragEndEvent: PropTypes.object,
 
 
     /**
-     * Read-only prop. This prop is updated when the user releases from dragging the canvas. This contains
+     * Read-only prop. To use this, make sure that enableEvents is set to True, or that enableProps is a list that contains this event type.
+     *  This prop is updated when the user releases from dragging the canvas. This contains
      * the picking info describing the object being dragged.
      * 
      * Complete description here:

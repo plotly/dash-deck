@@ -38,6 +38,7 @@ class App extends Component {
                 data={json}
                 mapboxKey={MAPBOX_ACCESS_TOKEN}
                 tooltip={tooltip}
+                enableEvents={["click"]}
             />
             </div>
         );
