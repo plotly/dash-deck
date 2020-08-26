@@ -1,83 +1,202 @@
-# CONTRIBUTING
+# Contributing to Dash Deck
 
-### Install dependencies
+Thank you for your interesting in contributing to this open-source project! Make sure that you have read and understood our [code of conduct](CODE_OF_CONDUCT.md).
 
-If you have selected install_dependencies during the prompt, you can skip this part.
+## Setting up the environment
 
-1. Install npm packages
-    ```
-    $ npm install
-    ```
-2. Create a virtual env and activate.
-    ```
-    $ virtualenv venv
-    $ . venv/bin/activate
-    ```
-    _Note: venv\Scripts\activate for windows_
+Please follow the following steps for local testing:
 
-3. Install python packages required to build components.
-    ```
-    $ pip install -r requirements.txt
-    ```
-4. Install the python packages for testing (optional)
-    ```
-    $ pip install -r tests/requirements.txt
-    ```
+1. Clone the repo
+```commandline
+git clone https://github.com/plotly/dash-deck.git
+```
+2. Instal `virtualenv` with `pip install virtualenv`.
 
-### Write your component code in `src/lib/components/DeckGL.react.js`.
+3. In order to run the Python builds (`npm run build:py`) you need to create a 
+venv for this project. Run this:
+```commandline
+cd dash-deck
+virtualenv venv
+source venv/bin/activate  # For Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-- The demo app is in `src/demo` and you will import your example component code into your demo app.
-- Test your code in a Python environment:
-    1. Build your code
-        ```
-        $ npm run build
-        ```
-    2. Run and modify the `usage.py` sample dash app:
-        ```
-        $ python usage.py
-        ```
-- Write tests for your component.
-    - A sample test is available in `tests/test_usage.py`, it will load `usage.py` and you can then automate interactions with selenium.
-    - Run the tests with `$ pytest tests`.
-    - The Dash team uses these types of integration tests extensively. Browse the Dash component code on GitHub for more examples of testing (e.g. https://github.com/plotly/dash-core-components)
-- Add custom styles to your component by putting your custom CSS files into your distribution folder (`dash_deck`).
-    - Make sure that they are referenced in `MANIFEST.in` so that they get properly included when you're ready to publish your component.
-    - Make sure the stylesheets are added to the `_css_dist` dict in `dash_deck/__init__.py` so dash will serve them automatically when the component suite is requested.
-- [Review your code](./review_checklist.md)
+4. Install the JavaScript dependencies and build the code:
+```commandline
+npm install
+npm run build:all
+```
 
-### Create a production build and publish:
+#### Package manager
 
-1. Build your code:
-    ```
-    $ npm run build
-    ```
-2. Create a Python tarball
-    ```
-    $ python setup.py sdist
-    ```
-    This distribution tarball will get generated in the `dist/` folder
+The preferred package manager for this project is `npm`. If you are using `yarn`, make sure to delete `yarn.lock` and to update `package-lock.json` before merging a PR.
 
-3. Test your tarball by copying it into a new environment and installing it locally:
-    ```
-    $ pip install dash_deck-0.0.1.tar.gz
-    ```
+## Coding Style
 
-4. If it works, then you can publish the component to NPM and PyPI:
-    1. Publish on PyPI
-        ```
-        $ twine upload dist/*
-        ```
-    2. Cleanup the dist folder (optional)
-        ```
-        $ rm -rf dist
-        ```
-    3. Publish on NPM (Optional if chosen False in `publish_on_npm`)
-        ```
-        $ npm publish
-        ```
-        _Publishing your component to NPM will make the JavaScript bundles available on the unpkg CDN. By default, Dash serves the component library's CSS and JS locally, but if you choose to publish the package to NPM you can set `serve_locally` to `False` and you may see faster load times._
+Please lint any additions to Python code with `black`:
+```commandline
+black usage*
+black tests
+black demos
+```
 
-5. Share your component with the community! https://community.plotly.com/c/dash
-    1. Publish this repository to GitHub
-    2. Tag your GitHub repository with the plotly-dash tag so that it appears here: https://github.com/topics/plotly-dash
-    3. Create a post in the Dash community forum: https://community.plotly.com/c/dash
+## Code quality & design
+
+-   Is your code clear? If you had to go back to it in a month, would you be happy to? If someone else had to contribute to it, would they be able to?
+
+    A few suggestions:
+
+    -   Make your variable names descriptive and use the same naming conventions throughout the code.
+
+    -   For more complex pieces of logic, consider putting a comment, and maybe an example.
+
+    -   In the comments, focus on describing _why_ the code does what it does, rather than describing _what_ it does. The reader can most likely read the code, but not necessarily understand why it was necessary.
+
+    -   Don't overdo it in the comments. The code should be clear enough to speak for itself. Stale comments that no longer reflect the intent of the code can hurt code comprehension.
+
+*   Don't repeat yourself. Any time you see that the same piece of logic can be applied in multiple places, factor it out into a function, or variable, and reuse that code.
+*   Scan your code for expensive operations (large computations, DOM queries, React re-renders). Have you done your possible to limit their impact? If not, it is going to slow your app down.
+*   Can you think of cases where your current code will break? How are you handling errors? Should the user see them as notifications? Should your app try to auto-correct them for them?
+
+
+## Tests
+
+### Running the tests
+
+Activate your virtualenv:
+```commandline
+source venv/bin/activate
+```
+
+If needed, install the requirements:
+```commandline
+pip install -r demos/requirements.txt
+pip install -r tests/requirements.txt
+```
+
+Run the following tests:
+```commandline
+pytest tests
+```
+
+### Mapbox in CircleCI
+
+Many rendering tests will try to render maps by retrieving them using mapbox tokens. To ensure that the mapbox token is correct, please make sure that an environment variable called `MAPBOX_API_TOKEN` is defined in [the project settings](https://app.circleci.com/settings/project/github/plotly/dash-deck/environment-variables) (this link is only accessible if you are a Plotly organization member). The value of the environment variable can be found in your [mapbox account](https://account.mapbox.com/).
+
+### Percy
+
+If you are testing locally, make sure to configure your Percy environment variables correctly:
+```commandline
+PERCY_BRANCH=local
+PERCY_ENABLED=1
+PERCY_TOKEN=***************
+```
+
+You can find the token in the [project settings of the Percy project](https://percy.io/plotly/dash-deck/settings). Only members of the Plotly organizations have access to this token.
+
+## Publishing
+
+Create a pull request and tag the Plotly team (`@plotly/dash-core`) and tag / request review from [@xhlulu](https://github.com/xhlulu).
+
+After a review has been done and your changes have been approved, create a prerelease and comment in the PR. Version numbers should follow [semantic versioning][].
+
+To publish or create a prerelease:
+
+1. Check `MANIFEST.in` has all of the extra files (like CSS)
+2. Bump version numbers in `package.json`, update the [CHANGELOG](CHANGELOG.md), and make a pull request
+3. Once the pull request is merged into master:
+4. Build
+```
+npm run build:all
+```
+5. Create distribution tarball
+```
+python setup.py sdist
+```
+6. Copy the tarball into a separate folder and try to install it and run the examples:
+```
+cp dist/dash_deck-x.x.x.tar.gz ../temp
+cp usage.py ../temp
+cd ../temp
+source venv/bin/activate
+pip install dash_deck-x.x.x.tar.gz
+python usage.py
+```
+7. If the examples work, then publish:
+```
+npm publish
+twine upload dist/dash_deck-x.x.x.tar.gz
+```
+8. Tag your release with git:
+```
+git tag -a 'vx.x.x' -m 'vx.x.x'
+git push origin master --follow-tags
+```
+9. Verify that the publish worked by installing it:
+```
+cd ../temp
+pip install dash-deck==x.x.x
+python usage.py
+```
+
+
+Make a post in the [Dash Community Forum](https://community.plotly.com/c/dash)
+* Title it `":mega: Announcement! New <Your Feature> - Feedback Welcome"`
+* In the description, link to the PR and any relevant issue(s)
+* Pin the topic so that it appears at the top of the forum for two weeks
+
+## [Checklists](http://rs.io/unreasonable-effectiveness-of-checklists/)
+**Beginner tip:** _Copy and paste this section as a comment in your PR, then check off the boxes as you go!_
+### Pre-Merge checklist
+- [ ] The project was correctly built with `npm run build:all`.
+- [ ] If there was any conflict, it was solved correctly
+- [ ] All changes were documented in CHANGELOG.md.
+- [ ] All tests on CircleCI have passed.
+- [ ] All Percy visual changes have been approved.
+- [ ] Two people have :dancer:'d the pull request. You can be one of these people if you are a Dash Deck core contributor.
+
+### Merge step
+1. Make sure to *Squash and Merge* your contribution if you have created multiple commits to change a specific feature.
+2. Make sure to *Rebase and Merge* if you added many different features, and need to contribute multiple different commits.
+
+### Post-Merge checklist
+- [ ] You have tagged the release using `git tag v<version_number>` _(for the contributor merging the PR)_.
+- [ ] You have pushed this tag using `git push <tag_name>` _(for the contributor merging the PR)_.
+- [ ] You have deleted the branch.
+
+### Pre-Release checklist
+- [ ] Everything in the Pre-Merge checklist is completed.
+- [ ] `git remote show origin` shows you are in the correct repository.
+- [ ] `git branch` shows that you are on the expected branch.
+- [ ] `git status` shows that there are no unexpected changes.
+- [ ] Both `package.json` and `dash_deck/package.json` versions have been correctly updated.
+
+### Release Step
+Complete the "Publishing" section.
+
+### Post-Release checklist
+- [ ] Step 1 and 2 of Post-merge checklist are completed.
+- [ ] You have closed all issues that this pull request solves, and commented the new version number users should install.
+- [ ] If significant enough, you have created an issue about documenting the new feature or change and you have added it to the [Documentation] project.
+- [ ] You have created a pull request in [Dash Docs] with the new release of your feature by editing that project's [`requirements.txt` file](https://github.com/plotly/dash-docs/blob/master/requirements.txt).
+
+
+## Financial Contributions
+
+Dash, and many of Plotly's open source products, have been funded through direct sponsorship by companies. [Get in touch](https://plotly.com/products/on-premise/) about funding feature additions, consulting, or custom app development.
+
+[Dash Core Components]: https://dash.plotly.com/dash-core-components
+[Dash HTML Components]: https://github.com/plotly/dash-html-components
+[write your own components]: https://dash.plotly.com/plugins
+[Dash Component Biolerplate]: https://github.com/plotly/dash-component-boilerplate
+[issues]: https://github.com/plotly/dash-core-components/issues 
+[GitHub flow]: https://guides.github.com/introduction/flow/
+[eslintrc-react.json]: https://github.com/plotly/dash-components-archetype/blob/master/config/eslint/eslintrc-react.json
+[contributors]: https://github.com/plotly/dash-core-components/graphs/contributors
+[semantic versioning]: https://semver.org/
+[Dash Community Forum]: https://community.plotly.com/c/dash
+[Confirmation Modal component]: https://github.com/plotly/dash-core-components/pull/211#issue-195280462
+[Confirmation Modal announcement]: https://community.plotly.com/t/announcing-dash-confirmation-modal-feedback-welcome/11627
+[Get in touch]: https://plotly.com/products/consulting-and-oem
+[Documentation]: https://github.com/orgs/plotly/projects/8
+[Dash Docs]: https://github.com/plotly/dash-docs
