@@ -17,7 +17,6 @@ import * as meshLayers from "@deck.gl/mesh-layers";
 import PropTypes from 'prop-types';
 
 import makeTooltip from '../tooltip';
-import { prop } from 'ramda';
 
 
 // CSV loader is needed to download and read CSV Files

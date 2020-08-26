@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-redeclare
 /* global document */
 let lastPickedObject;
 let lastTooltip;
@@ -90,6 +91,7 @@ function setStyles(row, header, value) {
 export function toText(jsonValue) {
   // Set contents of table value, trimming for certain types of data
   let text;
+  // eslint-disable-next-line no-magic-numbers
   if (Array.isArray(jsonValue) && jsonValue.length > 4) {
     text = `Array<${jsonValue.length}>`;
   } else if (typeof jsonValue === 'string') {

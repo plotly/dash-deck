@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import { DeckGL } from '../lib';
 
 let json;
+// eslint-disable-next-line prefer-const
 json = { "description": "The deck.gl website hexagonlayer example in JSON format", "websiteUrl": "https://deck.gl/#/examples/core-layers/hexagon-layer", "initialViewState": { "longitude": -1.4157267858730052, "latitude": 52.232395363869415, "zoom": 6.6, "minZoom": 5, "maxZoom": 15, "pitch": 40.5, "bearing": -27.396674584323023 }, "views": [ { "@@type": "MapView", "controller": true, "mapStyle": "mapbox://styles/mapbox/dark-v9" } ], "layers": [ { "@@type": "HexagonLayer", "id": "heatmap", "data": "https://raw.githubusercontent.com/visgl/deck.gl-data/master/examples/3d-heatmap/heatmap-data.csv", "loadOptions": { "csv": { "header": false } }, "coverage": 1, "pickable": true, "autoHighlight": true, "elevationRange": [ 0, 3000 ], "elevationScale": 50, "extruded": true, "getPosition": "@@=-", "radius": 1000, "upperPercentile": 100, "colorRange": [ [ 1, 152, 189 ], [ 73, 227, 206 ], [ 216, 254, 181 ], [ 254, 237, 177 ], [ 254, 173, 84 ], [ 209, 55, 78 ] ] } ] };
 // json = {};
 // json = { "description": "A minimal deck.gl example rendering a circle with text", "initialViewState": { "longitude": -122.45, "latitude": 37.8, "zoom": 12 }, "layers": [ { "@@type": "ScatterplotLayer", "data": [ { "position": [ -122.45, 37.8 ] } ], "getFillColor": [ 255, 0, 0, 255 ], "getRadius": 1000 }, { "@@type": "TextLayer", "data": [ { "position": [ -122.45, 37.8 ], "text": "Hello World" } ] } ] };
