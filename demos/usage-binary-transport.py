@@ -24,6 +24,7 @@ mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 NODES_URL = "https://raw.githubusercontent.com/ajduberstein/geo_datasets/master/social_nodes.csv"
 
 
+
 def generate_graph_data(num_nodes, random_seed):
     """Generates a graph of 10k nodes with a 3D force layout
 
@@ -43,9 +44,7 @@ def generate_graph_data(num_nodes, random_seed):
 
 def make_renderer(nodes, use_binary_transport=False):
     """Creates the pydeck visualization for rendering"""
-    view_state = pydeck.ViewState(
-        offset=[0, 0], latitude=0, longitude=0, bearing=0, pitch=0, zoom=10,
-    )
+    view_state = pydeck.ViewState(offset=[0, 0], latitude=None, longitude=None, bearing=None, pitch=None, zoom=10,)
 
     views = [pydeck.View(type="OrbitView", controller=True)]
 
@@ -63,7 +62,7 @@ def make_renderer(nodes, use_binary_transport=False):
         radius=50,
     )
 
-    return pydeck.Deck(layers=[nodes_layer], views=views, map_provider=None,)
+    return pydeck.Deck(layers=[nodes_layer], initial_view_state=view_state, views=views, map_provider=None)
 
 
 nodes = pd.read_csv(NODES_URL)
@@ -71,7 +70,9 @@ nodes = pd.read_csv(NODES_URL)
 colors = pydeck.data_utils.assign_random_colors(nodes["group"])
 # Divide by 255 to normalize the colors
 # Specify positions and colors as columns of lists
-nodes["color"] = nodes.apply(lambda row: [c for c in colors.get(row["group"])], axis=1)
+nodes["color"] = nodes.apply(
+    lambda row: [c / 255 if False else c for c in colors.get(row["group"])], axis=1
+)
 nodes["position"] = nodes.apply(lambda row: [row["x"], row["y"], row["z"]], axis=1)
 
 # Remove all unused columns
@@ -80,12 +81,11 @@ del nodes["y"]
 del nodes["z"]
 del nodes["group"]
 
-r = make_renderer(nodes, use_binary_transport=True)
-
-
+r = make_renderer(nodes, use_binary_transport=False)
+    
 app = dash.Dash(__name__)
 
-app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl"))
+app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl", style={"background-color": "charcoal"}))
 
 
 if __name__ == "__main__":
