@@ -81,11 +81,19 @@ jobs:
                 when: always
 
             - run:
-                name: Run tests
+                name: Rendering Tests
                 command: |
                     . venv/bin/activate
-                    pytest tests
+                    pytest tests/test_render.py
                 when: always
+            
+            - run:
+                name: Percy Snapshot Tests
+                command: |
+                    . venv/bin/activate
+                    pytest tests/test_percy.py
+                when: always
+                
 
             - store_artifacts:
                 path: /tmp/dash_artifacts
