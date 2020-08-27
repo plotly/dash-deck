@@ -28,19 +28,17 @@ def pil_to_b64(im, ext="jpeg"):
 
 def build_app(imgs):
     app = dash.Dash(__name__)
-    app.layout = html.Div([
-        html.Img(id="display"),
-        dcc.Location(id='url', refresh=False)
-    ])
+    app.layout = html.Div(
+        [html.Img(id="display"), dcc.Location(id="url", refresh=False)]
+    )
 
-    @app.callback(Output("display", "src"), [Input('url', 'pathname')])
+    @app.callback(Output("display", "src"), [Input("url", "pathname")])
     def update_image(url):
-        if url in [None, '/']:
+        if url in [None, "/"]:
             return dash.no_update
         return pil_to_b64(imgs[url.strip("/")], ext="png")
 
     return app
-
 
 
 def test_percy(dash_duo):

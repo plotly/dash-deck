@@ -54,18 +54,18 @@ layers = [
         get_line_color=[60, 60, 60],
         get_fill_color=[200, 200, 200],
     ),
-    pydeck.Layer(
-        "ColumnLayer",
-        id="power-plant",
-        data=df,
-        get_elevation="capacity_mw",
-        get_position=["longitude", "latitude"],
-        elevation_scale=100,
-        pickable=True,
-        auto_highlight=True,
-        radius=20000,
-        get_fill_color="color",
-    ),
+    # pydeck.Layer(
+    #     "ColumnLayer",
+    #     id="power-plant",
+    #     data=df,
+    #     get_elevation="capacity_mw",
+    #     get_position=["longitude", "latitude"],
+    #     elevation_scale=100,
+    #     pickable=True,
+    #     auto_highlight=True,
+    #     radius=20000,
+    #     get_fill_color="color",
+    # ),
 ]
 
 r = pydeck.Deck(
@@ -74,15 +74,13 @@ r = pydeck.Deck(
     tooltip={"text": "{name}, {primary_fuel} plant, {country}"},
     layers=layers,
     # Note that this must be set for the globe to be opaque
-    parameters={"cull": True},
+    # parameters={"cull": True},
 )
 
 
 app = dash.Dash(__name__)
 
-app.layout = html.Div(
-    dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_api_token)
-)
+app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl"))
 
 
 if __name__ == "__main__":

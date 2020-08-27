@@ -49,8 +49,10 @@ view_state = pydeck.ViewState(latitude=0, longitude=0, zoom=1)
 
 r = pydeck.Deck(custom_layer, initial_view_state=view_state, map_provider=None)
 
-
-app = dash.Dash(__name__)
+external_scripts = [
+    {"src": "https://unpkg.com/pydeck-custom-layer-demo/dist/bundle.js"}
+]
+app = dash.Dash(__name__, external_scripts=external_scripts)
 
 app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl"))
 
