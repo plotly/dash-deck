@@ -1,7 +1,6 @@
 """
 Adapted from: https://pydeck.gl/gallery/hexagon_layer.html
 
-============================
 Personal injury road accidents in GB from 1979.
 
 The layer aggregates data within the boundary of each hexagon cell.

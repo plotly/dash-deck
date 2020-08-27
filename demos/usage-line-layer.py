@@ -1,7 +1,6 @@
 """
 Adapted from: https://pydeck.gl/gallery/line_layer.html
 
-============================
 Flights from Heathrow around Europe, adapted from the deck.gl documentation.
 
 """

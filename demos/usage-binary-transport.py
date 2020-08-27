@@ -1,10 +1,9 @@
 """
 Adapted from: https://pydeck.gl/gallery/binary_transport.html
 
-================
-
-Example of binary transport in pydeck. This notebook renders 10k points via the web sockets within
-a Jupyter notebook if you run with ``generate_vis(notebook_display=True)``
+Example of binary transport in pydeck. This notebook renders 10k points 
+via the web sockets within a Jupyter notebook if you run with 
+``generate_vis(notebook_display=True)``
 
 Since binary transfer relies on Jupyter's kernel communication,
 note that the .html in the pydeck documentation does not use binary transfer

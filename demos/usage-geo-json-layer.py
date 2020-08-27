@@ -1,9 +1,8 @@
 """
 Adapted from: https://pydeck.gl/gallery/geojson_layer.html
 
-============================
-
-Property values in Vancouver, Canada, adapted from the deck.gl example pages. Input data is in a GeoJSON format.
+Property values in Vancouver, Canada, adapted from the deck.gl example 
+pages. Input data is in a GeoJSON format.
 """
 import os
 

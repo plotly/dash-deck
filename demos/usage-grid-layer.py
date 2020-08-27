@@ -1,8 +1,6 @@
 """
 Adapted from: https://pydeck.gl/gallery/grid_layer.html
 
-============================
-
 Locations of bike parking within San Francisco.
 
 Adapted from the deck.gl documentation.

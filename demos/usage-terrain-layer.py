@@ -1,7 +1,6 @@
 """
 Adapted from: https://pydeck.gl/gallery/terrain_layer.html
 
-============================
 Extruded terrain using AWS Open Data Terrain Tiles and Mapbox Satellite imagery
 
 """

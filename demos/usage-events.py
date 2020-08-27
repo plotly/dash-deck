@@ -1,3 +1,7 @@
+"""
+This demo shows how to interact with event callbacks 
+like clickInfo, hoverInfo, dragStartInfo, etc.
+"""
 import os
 import json
 

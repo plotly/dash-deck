@@ -1,8 +1,11 @@
 """
-Adapted from: 
+Adapted from: https://pydeck.gl/gallery/great_circle_layer.html
 
-============================
+Plot of direct flights to and from San Francisco International Airport.
 
+Origin is in green; destinations are in blue.
+
+Adapted from the deck.gl documentation.
 """
 import os
 

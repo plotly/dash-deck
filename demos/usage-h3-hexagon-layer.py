@@ -1,7 +1,6 @@
 """
 Adapted from: https://pydeck.gl/gallery/h3_hexagon_layer.html
 
-============================
 Plot of values for a particular hex ID in the H3 geohashing scheme.
 
 This example is adapted from the deck.gl documentation.
