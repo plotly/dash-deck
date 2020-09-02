@@ -4,18 +4,15 @@ import { StaticMap } from "react-map-gl";
 import {JSONConverter} from '@deck.gl/json';
 import {CSVLoader} from "@loaders.gl/csv";
 import {registerLoaders} from "@loaders.gl/core";
-import {
-  MapView, 
-  FirstPersonView, 
-  OrthographicView, 
-  OrbitView
-} from '@deck.gl/core';
+import * as core from '@deck.gl/core';
 import * as layers from "@deck.gl/layers";
-import * as aggregationLayers from "@deck.gl/aggregation-layers"
+import * as aggregationLayers from "@deck.gl/aggregation-layers";
 import * as geoLayers from "@deck.gl/geo-layers";
 import * as meshLayers from "@deck.gl/mesh-layers";
 import PropTypes from 'prop-types';
+import GL from '@luma.gl/constants';
 
+import * as LumaGL from '../lumagl';
 import makeTooltip from '../tooltip';
 
 
@@ -30,13 +27,15 @@ const configuration = {
     aggregationLayers,
     geoLayers,
     meshLayers,
-    {
-      MapView, 
-      FirstPersonView, 
-      OrthographicView, 
-      OrbitView
-    }
+    // All the core elements of deck.gl
+    core,
+    // Cherry picked luma.gl exports relevant to deck
+    LumaGL
   ),
+  enumerations: {
+    COORDINATE_SYSTEM: core.COORDINATE_SYSTEM,
+    GL
+  }
 }
 const jsonConverter = new JSONConverter({ configuration });
 
