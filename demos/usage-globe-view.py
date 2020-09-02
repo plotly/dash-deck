@@ -3,8 +3,17 @@ Adapted from: https://pydeck.gl/gallery/globe_view.html
 
 ============================
 
+This demos the experimental Glove View from deck.gl/pydeck by using the GeoJSON 
+and column layers. The data used contains global plant database and can be found here:
+https://github.com/ajduberstein/geo_datasets
+
+Notice that here, we are explicitly convert the r.to_json() into a python dictionary.
+This is needed because the data contains NaN, which can't be parsed by the underlying
+JavaScript JSON parser, but it can be parsed by Python's JSON engine.
+
 """
 import os
+import json
 
 import dash
 import dash_deck
@@ -54,33 +63,35 @@ layers = [
         get_line_color=[60, 60, 60],
         get_fill_color=[200, 200, 200],
     ),
-    # pydeck.Layer(
-    #     "ColumnLayer",
-    #     id="power-plant",
-    #     data=df,
-    #     get_elevation="capacity_mw",
-    #     get_position=["longitude", "latitude"],
-    #     elevation_scale=100,
-    #     pickable=True,
-    #     auto_highlight=True,
-    #     radius=20000,
-    #     get_fill_color="color",
-    # ),
+    pydeck.Layer(
+        "ColumnLayer",
+        id="power-plant",
+        data=df,
+        get_elevation="capacity_mw",
+        get_position=["longitude", "latitude"],
+        elevation_scale=100,
+        pickable=True,
+        auto_highlight=True,
+        radius=20000,
+        get_fill_color="color",
+    ),
 ]
 
 r = pydeck.Deck(
     views=[view],
     initial_view_state=view_state,
-    tooltip={"text": "{name}, {primary_fuel} plant, {country}"},
     layers=layers,
     # Note that this must be set for the globe to be opaque
-    # parameters={"cull": True},
+    parameters={"cull": True},
 )
 
 
 app = dash.Dash(__name__)
 
-app.layout = html.Div(dash_deck.DeckGL(r.to_json(), id="deck-gl"))
+app.layout = html.Div(dash_deck.DeckGL(
+    json.loads(r.to_json()), id="deck-gl", style={"background-color": "black"},
+    tooltip={"text": "{name}, {primary_fuel} plant, {country}"},
+))
 
 
 if __name__ == "__main__":
