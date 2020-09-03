@@ -140,7 +140,7 @@ You can now run the demo you want to try (replace `<name>` with the layer type y
 python demos/usage-<name>.py
 ```
 
-## Tips and Advices
+## Tips and Tricks
 
 ### Side-by-side or overlapping maps with `Views`
 
@@ -211,6 +211,35 @@ deck_component = dash_deck.DeckGL(
 )
 ```
 To learn more about tooltips, please check out the [section in the Pydeck docs](https://pydeck.gl/tooltip.html). You will also be able to find some `demos` with custom tooltips.
+
+### Custom Layers
+To build custom layers, you will need to create a custom version of Dash Deck. To do this you will need:
+1. Clone this project, create a venv, `npm` `install` and `build` (see CONTRIBUTING.md).
+2. Add necessary packages to your `package.json`. E.g. `npm install turf`, if you need a library called turn.
+3. Create a Javascript file inside `dash-deck/src/lib/` that will contain your layer. See [this as an example](https://github.com/ajduberstein/pydeck_custom_layer/blob/master/labeled-geojson-layer.js).
+4. Import the Javascript file in `dash-deck/src/lib/components/DeckGL.react.js`, e.g.:
+```JavaScript
+...
+import LabeledGeoJsonLayer from "../labeled-geojson-layer.js";
+...
+```
+
+5. Add it to the `JSONConfiguration` in the same file:
+```JavaScript
+const configuration = {
+  classes: Object.assign(
+    {}, 
+    ...,
+    LabeledGeoJsonLayer
+  ),
+  enumerations: ...
+}
+```
+
+6. `npm build`
+7. Start creating an app that uses `pydeck` or JSON. See `dash-deck/demos/other/usage-custom-layer.py`.
+8. Run the tests (see contributing.md).
+9. When you are ready, create the installable distribution files by running `python setup.py sdist` inside `dash-deck/`.
 
 ## Contributing
 

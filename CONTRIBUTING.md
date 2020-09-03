@@ -24,7 +24,7 @@ pip install -r requirements.txt
 4. Install the JavaScript dependencies and build the code:
 ```commandline
 npm install
-npm run build:all
+npm run build
 ```
 
 #### Package manager
@@ -107,7 +107,7 @@ To publish or create a prerelease:
 3. Once the pull request is merged into master:
 4. Build
 ```
-npm run build:all
+npm run build
 ```
 5. Create distribution tarball
 ```
@@ -148,7 +148,7 @@ Make a post in the [Dash Community Forum](https://community.plotly.com/c/dash)
 ## [Checklists](http://rs.io/unreasonable-effectiveness-of-checklists/)
 **Beginner tip:** _Copy and paste this section as a comment in your PR, then check off the boxes as you go!_
 ### Pre-Merge checklist
-- [ ] The project was correctly built with `npm run build:all`.
+- [ ] The project was correctly built with `npm run build`.
 - [ ] If there was any conflict, it was solved correctly
 - [ ] All changes were documented in CHANGELOG.md.
 - [ ] All tests on CircleCI have passed.

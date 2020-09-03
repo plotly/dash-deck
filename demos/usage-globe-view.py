@@ -88,10 +88,14 @@ r = pydeck.Deck(
 
 app = dash.Dash(__name__)
 
-app.layout = html.Div(dash_deck.DeckGL(
-    json.loads(r.to_json()), id="deck-gl", style={"background-color": "black"},
-    tooltip={"text": "{name}, {primary_fuel} plant, {country}"},
-))
+app.layout = html.Div(
+    dash_deck.DeckGL(
+        json.loads(r.to_json()),
+        id="deck-gl",
+        style={"background-color": "black"},
+        tooltip={"text": "{name}, {primary_fuel} plant, {country}"},
+    )
+)
 
 
 if __name__ == "__main__":
