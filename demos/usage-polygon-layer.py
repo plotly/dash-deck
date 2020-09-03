@@ -2,7 +2,8 @@
 Adapted from: https://pydeck.gl/gallery/polygon_layer.html
 
 ============================
-Property values in Vancouver, Canada, adapted from the deck.gl example pages.
+Property values in Vancouver, Canada, adapted from the deck.gl example pages. 
+This demos luma.gl-based shadows using the LightingEffect effect.
 
 """
 import os
