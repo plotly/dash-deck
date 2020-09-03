@@ -4,7 +4,7 @@ Dash Deck is Dash component that brings `deck.gl` to Dash. It lets you create in
 
 ![demo](https://raw.githubusercontent.com/plotly/dash-deck/master/images/demo.gif)
 
-* Try it now in the [Dash Deck Explorer](https://dash-playground.plotly.host/deck-explorer)
+* Try it now in the [Dash Deck Explorer][explorer-demo]
 
 ## Getting started
 
@@ -112,7 +112,7 @@ deck_component = dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=mapbox_ap
 
 ## Running the demos
 
-The Pydeck already created many amazing demos, which are shown in [their doc gallery](https://pydeck.gl/index.html#gallery). We simply ported them for Dash Deck. At the start of each `usage-<name>.py` file, you will be able to find the source to the original demo.
+The Pydeck team has already created many amazing demos, which are shown in [their doc gallery](https://pydeck.gl/index.html#gallery). We ported them for Dash Deck with minor modifications. You can read the docstring of each `usage-<name>.py` file, you will be able to find the source code of the original demo. You can also try them directly in the [Dash Deck Explorer][explorer-demo].
 
 First, make sure you clone the project:
 ```
@@ -309,3 +309,6 @@ This prop is updated when the user releases from dragging the canvas. This conta
 the picking info describing the object being dragged.
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object
+
+
+[explorer-demo]: https://dash-gallery.plotly.host/dash-deck-explorer
