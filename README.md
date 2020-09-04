@@ -50,7 +50,40 @@ For a full example, see `usage.py`. To find examples of the JSON API, see [the d
 
 ### Quickstart (R)
 
-(tbd)
+First, install the package from GitHub (the package is not yet available via CRAN):
+
+```
+remotes::install_github("plotly/dash-deck")
+```
+
+then, define your map using the deck.gl JSON API:
+
+```r
+deck_data <- list(
+    "description" = "A minimal deck.gl example rendering a circle with text",
+    "initialViewState" = list("longitude" = -122.45, "latitude" = 37.8, "zoom" = 12),
+    "layers" = list(
+        list(
+            "@@type" = "TextLayer",
+            "data" = list(list("position" = list(-122.45, 37.8), "text" = "Hello World"))
+        )
+    )
+)
+```
+
+finally, create your component and add it to your layout:
+
+```r
+library(dash)
+library(dashDeck)
+library(dashHtmlComponents)
+
+deck_component <- deckGL(data=deck_data, id="deck-gl")
+
+app <- Dash$new()
+
+app$layout(htmlDiv(deck_component))
+```
 
 ### `pydeck` integrations
 
