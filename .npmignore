@@ -23,3 +23,18 @@ config
 .travis.yml
 CHANGELOG.md
 README.md
+
+# Python stuff
+demos
+tests
+*__pycache__*
+usage.py
+usage-pdk.py
+setup.py
+
+dash_deck/*hmr.js
+dash_deck/*hmr.json
+dash_deck/output.js
+inst/deps/*hmr.js
+inst/deps/*hmr.json
+inst/deps/output.js
