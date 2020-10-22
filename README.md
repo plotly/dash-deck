@@ -6,7 +6,7 @@ Dash Deck is a library for building 3D interactive maps and graphical visualizat
 
 * Try it in the [Dash Deck Explorer][explorer-demo]
 * Read [the announcement](https://community.plotly.com/t/initial-release-of-dash-deck-a-library-for-rendering-pydeck-and-deck-gl-in-dash/44528)
-* Find it on [PyPi](https://pypi.org/project/dash-deck/).
+* Find it on [PyPi](https://pypi.org/project/dash-deck/) and [conda](https://anaconda.org/conda-forge/dash-deck).
 
 ## Getting started
 
