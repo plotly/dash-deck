@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `demos/usage-bootstrap.py`: Example showing deck map inside a container.
+- `disableContext` property to prevent right click context menu form showing up on deck.gl map
 
 ## [0.0.1] - 2020-??-??
 
