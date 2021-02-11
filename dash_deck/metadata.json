@@ -111,7 +111,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "This is a boolean value indicating whether or not to disable the default context menu\nthat shows up when right clicking on the map. If set to true, right clicking to rotate\na map or adjust its pitch will not trigger the default context menu.",
+        "description": "This is a boolean value (e.g. `True`, `False`)  indicating whether or not to disable the default context menu\nthat shows up when right clicking on the map. If set to `True`, right clicking to rotate\na map or adjust its pitch will not trigger the default context menu.",
         "defaultValue": {
           "value": "true",
           "computed": false
