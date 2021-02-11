@@ -22,6 +22,9 @@ You can also give a dictionary specifying an `html` template and custom style us
 information about templating, see: https://pydeck.gl/tooltip.html
 - mapboxKey (string; optional): You will need a mapbox token to use deck.gl. Please create a mapbox
 and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
+- disableContext (boolean; default True): This is a boolean value indicating whether or not to disable the default context menu
+that shows up when right clicking on the map. If set to true, right clicking to rotate
+a map or adjust its pitch will not trigger the default context menu.
 - clickEvent (dict; optional): Read-only prop. To use this, make sure that `enableEvents` is set to `True`, or that `enableEvents` is a list that contains this event type.
 This prop is updated when an element in the map is clicked. This contains
 the original gesture event (in JSON).
@@ -56,12 +59,12 @@ the picking info describing the object being dragged.
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object"""
     @_explicitize_args
-    def __init__(self, data=Component.UNDEFINED, id=Component.UNDEFINED, style=Component.UNDEFINED, enableEvents=Component.UNDEFINED, tooltip=Component.UNDEFINED, mapboxKey=Component.UNDEFINED, clickEvent=Component.UNDEFINED, clickInfo=Component.UNDEFINED, hoverEvent=Component.UNDEFINED, hoverInfo=Component.UNDEFINED, dragStartEvent=Component.UNDEFINED, dragStartInfo=Component.UNDEFINED, dragEndEvent=Component.UNDEFINED, dragEndInfo=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['data', 'id', 'style', 'enableEvents', 'tooltip', 'mapboxKey', 'clickEvent', 'clickInfo', 'hoverEvent', 'hoverInfo', 'dragStartEvent', 'dragStartInfo', 'dragEndEvent', 'dragEndInfo']
+    def __init__(self, data=Component.UNDEFINED, id=Component.UNDEFINED, style=Component.UNDEFINED, enableEvents=Component.UNDEFINED, tooltip=Component.UNDEFINED, mapboxKey=Component.UNDEFINED, disableContext=Component.UNDEFINED, clickEvent=Component.UNDEFINED, clickInfo=Component.UNDEFINED, hoverEvent=Component.UNDEFINED, hoverInfo=Component.UNDEFINED, dragStartEvent=Component.UNDEFINED, dragStartInfo=Component.UNDEFINED, dragEndEvent=Component.UNDEFINED, dragEndInfo=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['data', 'id', 'style', 'enableEvents', 'tooltip', 'mapboxKey', 'disableContext', 'clickEvent', 'clickInfo', 'hoverEvent', 'hoverInfo', 'dragStartEvent', 'dragStartInfo', 'dragEndEvent', 'dragEndInfo']
         self._type = 'DeckGL'
         self._namespace = 'dash_deck'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['data', 'id', 'style', 'enableEvents', 'tooltip', 'mapboxKey', 'clickEvent', 'clickInfo', 'hoverEvent', 'hoverInfo', 'dragStartEvent', 'dragStartInfo', 'dragEndEvent', 'dragEndInfo']
+        self.available_properties = ['data', 'id', 'style', 'enableEvents', 'tooltip', 'mapboxKey', 'disableContext', 'clickEvent', 'clickInfo', 'hoverEvent', 'hoverInfo', 'dragStartEvent', 'dragStartInfo', 'dragEndEvent', 'dragEndInfo']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')

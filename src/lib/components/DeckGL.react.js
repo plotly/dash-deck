@@ -71,6 +71,16 @@ export default class DeckGL extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { disableContext } = this.props
+    if (disableContext) {
+        document
+            .getElementById("deckgl-wrapper")
+            .addEventListener("contextmenu", evt => evt.preventDefault());
+    }
+  }
+
+
   render() {
     let {enableEvents, data} = this.props;
     const {id, mapboxKey, tooltip, style} = this.props;
@@ -142,6 +152,7 @@ DeckGL.defaultProps = {
     mapboxKey: null,
     tooltip: false,
     enableEvents: false,
+    disableContext:true,
     style: {}
 };
 
@@ -184,6 +195,13 @@ DeckGL.propTypes = {
      * and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
      */
     mapboxKey: PropTypes.string,
+
+    /**
+     * This is a boolean value (e.g. `True`, `False`)  indicating whether or not to disable the default context menu
+     * that shows up when right clicking on the map. If set to `True`, right clicking to rotate
+     * a map or adjust its pitch will not trigger the default context menu.
+     */
+    disableContext: PropTypes.bool,
 
 
     /**
