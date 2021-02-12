@@ -152,7 +152,7 @@ DeckGL.defaultProps = {
     mapboxKey: null,
     tooltip: false,
     enableEvents: false,
-    disableContext:true,
+    disableContext: false,
     style: {}
 };
 
