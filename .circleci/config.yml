@@ -23,9 +23,9 @@ jobs:
                 name: Install requirements
                 command: |
                     . venv/bin/activate
-                    pip install -r requirements.txt --quiet
-                    pip install -r demos/requirements.txt --quiet
-                    pip install -r tests/requirements.txt --quiet
+                    pip install -r requirements.txt
+                    pip install -r tests/requirements.txt
+                    pip install -r demos/requirements.txt
 
             - run:
                 name: Install package.json
@@ -70,8 +70,8 @@ jobs:
                 command: |
                     . venv/bin/activate
                     pip install -r requirements.txt
-                    pip install -r demos/requirements.txt
                     pip install -r tests/requirements.txt
+                    pip install -r demos/requirements.txt
 
             - save_cache:
                 key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
