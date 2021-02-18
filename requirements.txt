@@ -3,4 +3,4 @@ dash[dev]>=1.3.1
 pydeck
 pandas
 cryptography<3.4;python_version<"3.7"
--e dash_deck
+-e .
