@@ -61,11 +61,7 @@ arc_layer = pdk.Layer(
 )
 
 view_state = pdk.ViewState(
-    latitude=37.7576171,
-    longitude=-122.5776844,
-    bearing=45,
-    pitch=50,
-    zoom=8,
+    latitude=37.7576171, longitude=-122.5776844, bearing=45, pitch=50, zoom=8,
 )
 
 
@@ -73,7 +69,7 @@ TOOLTIP_TEXT = {
     "html": "{S000} jobs <br /> Home of commuter in red; work location in green"
 }
 
-r = pdk.Deck(arc_layer, initial_view_state=view_state,mapbox_key=mapbox_api_token)
+r = pdk.Deck(arc_layer, initial_view_state=view_state, mapbox_key=mapbox_api_token)
 
 
 app = dash.Dash(__name__)
@@ -83,16 +79,22 @@ disablecontext = html.Div(
     [
         html.H3("Context menu disabled (disableContext=True)"),
         html.Div(
-        dash_deck.DeckGL(
-            r.to_json(),
-            id="disable_context",
-            tooltip=TOOLTIP_TEXT,
-            mapboxKey=r.mapbox_key,
-            disableContext=True,
+            dash_deck.DeckGL(
+                r.to_json(),
+                id="disable_context",
+                tooltip=TOOLTIP_TEXT,
+                mapboxKey=r.mapbox_key,
+                disableContext=True,
+            ),
+            style={"position": "relative", "height": "400px"},
         ),
-        style={"position": "relative","height":"400px"}),
     ],
-    style={ "width": "48%", "position": "relative", "float": "left",'border':"1px solid black"},
+    style={
+        "width": "48%",
+        "position": "relative",
+        "float": "left",
+        "border": "1px solid black",
+    },
 )
 
 
@@ -100,16 +102,22 @@ context = html.Div(
     [
         html.H3("Context menu enabled (disableContext=False)"),
         html.Div(
-        dash_deck.DeckGL(
-            r.to_json(),
-            id="enable_context",
-            tooltip=TOOLTIP_TEXT,
-            mapboxKey=r.mapbox_key,
-            disableContext=False,
+            dash_deck.DeckGL(
+                r.to_json(),
+                id="enable_context",
+                tooltip=TOOLTIP_TEXT,
+                mapboxKey=r.mapbox_key,
+                disableContext=False,
+            ),
+            style={"position": "relative", "height": "400px"},
         ),
-        style={"position": "relative","height":"400px"}),
     ],
-    style={"width": "48%", "position": "relative", "float": "right",'border':"1px solid black"},
+    style={
+        "width": "48%",
+        "position": "relative",
+        "float": "right",
+        "border": "1px solid black",
+    },
 )
 
 app.layout = html.Div([disablecontext, context])
