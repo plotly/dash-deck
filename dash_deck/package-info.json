@@ -1,6 +1,6 @@
 {
   "name": "dash_deck",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A Dash Component wrapping deck.gl",
   "repository": {
     "type": "git",
