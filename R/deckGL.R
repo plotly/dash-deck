@@ -1,8 +1,8 @@
 # AUTO GENERATED FILE - DO NOT EDIT
 
-deckGL <- function(data=NULL, id=NULL, style=NULL, enableEvents=NULL, tooltip=NULL, mapboxKey=NULL, disableContext=NULL, clickEvent=NULL, clickInfo=NULL, hoverEvent=NULL, hoverInfo=NULL, dragStartEvent=NULL, dragStartInfo=NULL, dragEndEvent=NULL, dragEndInfo=NULL) {
+deckGL <- function(id=NULL, clickEvent=NULL, clickInfo=NULL, data=NULL, disableContext=NULL, dragEndEvent=NULL, dragEndInfo=NULL, dragStartEvent=NULL, dragStartInfo=NULL, enableEvents=NULL, hoverEvent=NULL, hoverInfo=NULL, mapboxKey=NULL, style=NULL, tooltip=NULL) {
     
-    props <- list(data=data, id=id, style=style, enableEvents=enableEvents, tooltip=tooltip, mapboxKey=mapboxKey, disableContext=disableContext, clickEvent=clickEvent, clickInfo=clickInfo, hoverEvent=hoverEvent, hoverInfo=hoverInfo, dragStartEvent=dragStartEvent, dragStartInfo=dragStartInfo, dragEndEvent=dragEndEvent, dragEndInfo=dragEndInfo)
+    props <- list(id=id, clickEvent=clickEvent, clickInfo=clickInfo, data=data, disableContext=disableContext, dragEndEvent=dragEndEvent, dragEndInfo=dragEndInfo, dragStartEvent=dragStartEvent, dragStartInfo=dragStartInfo, enableEvents=enableEvents, hoverEvent=hoverEvent, hoverInfo=hoverInfo, mapboxKey=mapboxKey, style=style, tooltip=tooltip)
     if (length(props) > 0) {
         props <- props[!vapply(props, is.null, logical(1))]
     }
@@ -10,7 +10,7 @@ deckGL <- function(data=NULL, id=NULL, style=NULL, enableEvents=NULL, tooltip=NU
         props = props,
         type = 'DeckGL',
         namespace = 'dash_deck',
-        propNames = c('data', 'id', 'style', 'enableEvents', 'tooltip', 'mapboxKey', 'disableContext', 'clickEvent', 'clickInfo', 'hoverEvent', 'hoverInfo', 'dragStartEvent', 'dragStartInfo', 'dragEndEvent', 'dragEndInfo'),
+        propNames = c('id', 'clickEvent', 'clickInfo', 'data', 'disableContext', 'dragEndEvent', 'dragEndInfo', 'dragStartEvent', 'dragStartInfo', 'enableEvents', 'hoverEvent', 'hoverInfo', 'mapboxKey', 'style', 'tooltip'),
         package = 'dashDeck'
         )
 
