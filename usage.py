@@ -4,7 +4,7 @@ import dash_html_components as html
 
 import os
 
-mapbox_api_token = "pk.eyJ1IjoiaGFyaXNiYWwiLCJhIjoiY2pzbmR0cTU1MGI4NjQzbGl5eTBhZmZrZCJ9.XN4kLWt5YzqmGQYVpFFqKw"
+mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 data = {
     "description": "A minimal deck.gl example rendering a circle with text",

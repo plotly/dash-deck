@@ -16,7 +16,6 @@ import dash
 import dash_deck
 import dash_html_components as html
 import pydeck as pdk
-import pandas as pd
 
 mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
@@ -48,9 +47,8 @@ r = pdk.Deck(
 
 app = dash.Dash(__name__, external_scripts=None)
 
-r.layers[
-    0
-].scenegraph = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxAnimated/glTF-Binary/BoxAnimated.glb"
+URL = "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BoxAnimated/glTF-Binary/BoxAnimated.glb"
+r.layers[0].scenegraph = URL
 
 app.layout = html.Div(
     dash_deck.DeckGL(r.to_json(), id="deck-gl", mapboxKey=r.mapbox_key)
