@@ -1,6 +1,6 @@
 # Dash Deck
 
-Dash Deck is a library for building 3D interactive maps and graphical visualizations directly in Dash. Built on top of [deck.gl](https://deck.gl/), it supports maps built using [pydeck](https://pydeck.gl/) and deck.gl’s [JSON API](https://deck.gl/playground/).
+Dash Deck is a proof of concept library for building 3D interactive maps and graphical visualizations directly in Dash. Built on top of [deck.gl](https://deck.gl/), it supports maps built using [pydeck](https://pydeck.gl/) and deck.gl’s [JSON API](https://deck.gl/playground/).
 
 ![demo](https://raw.githubusercontent.com/plotly/dash-deck/master/images/demo.gif)
 
