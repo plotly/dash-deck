@@ -108,7 +108,7 @@ export default class DeckGL extends React.Component {
     let staticMap;
     if (mapboxKey !== null){
       staticMap = <Map
-        mapboxApiAccessToken={mapboxKey}
+        mapboxAccessToken={mapboxKey}
         mapStyle={deckProps.mapStyle}
       />
     } else {
