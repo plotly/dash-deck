@@ -1,6 +1,7 @@
 import React from 'react';
 import Deck from "deck.gl"
 import { Map } from "react-map-gl";
+import { Map as MapLibre } from 'react-map-gl/maplibre';
 import {JSONConverter} from '@deck.gl/json';
 import {CSVLoader} from "@loaders.gl/csv";
 import {registerLoaders} from "@loaders.gl/core";
@@ -104,7 +105,7 @@ export default class DeckGL extends React.Component {
     }
 
     // ******** STATIC MAP ******** 
-    // Only render static map if a mapbox token was given
+    // Only render static map if a mapbox token was given, else fallback to the maplibre backend
     let staticMap;
     if (mapboxKey !== null){
       staticMap = <Map
@@ -112,7 +113,9 @@ export default class DeckGL extends React.Component {
         mapStyle={deckProps.mapStyle}
       />
     } else {
-      staticMap = null;
+      staticMap = <MapLibre
+          mapStyle={deckProps.mapStyle}
+      />
     }
 
     // ******** EVENT CALLBACKS ********

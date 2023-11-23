@@ -33,7 +33,8 @@
     "deck.gl": "^8.9.32",
     "ramda": "^0.28.0",
     "react-map-gl": "^7.1.6",
-    "mapbox-gl": "^2.15.0"
+    "mapbox-gl": "^2.15.0",
+    "maplibre-gl": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
