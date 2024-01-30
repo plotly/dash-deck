@@ -48,7 +48,7 @@ view_state = pdk.ViewState(
 r = pdk.Deck(
     layers=[layer],
     initial_view_state=view_state,
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
 )
 
 app = dash.Dash(__name__)

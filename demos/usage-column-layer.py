@@ -54,7 +54,7 @@ r = pydeck.Deck(
     column_layer,
     initial_view_state=view,
     map_style="mapbox://styles/mapbox/satellite-v9",
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
 )
 
 app = dash.Dash(__name__)

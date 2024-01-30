@@ -44,7 +44,7 @@ r = pdk.Deck(
     bitmap_layer,
     initial_view_state=view_state,
     map_style=pdk.map_styles.SATELLITE,
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
 )
 
 

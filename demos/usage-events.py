@@ -51,7 +51,7 @@ map_view = pdk.View("MapView", controller=True)
 r = pdk.Deck(
     layers=[layer],
     initial_view_state=view_state,
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
     views=[map_view],
 )
 
