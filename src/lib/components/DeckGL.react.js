@@ -1,5 +1,5 @@
 import React from 'react';
-import Deck from "deck.gl"
+import Deck from "deck.gl"; // eslint-disable-line import/no-named-as-default
 import { Map } from "react-map-gl";
 import { Map as MapLibre } from 'react-map-gl/maplibre';
 import {JSONConverter} from '@deck.gl/json';
