@@ -4,6 +4,7 @@ Adapted from: https://pypi.org/project/pydeck/
 This demos shows you how to use pdk.View for controlling
 the size of the MapView.
 """
+
 import os
 
 import dash

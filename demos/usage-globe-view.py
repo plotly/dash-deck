@@ -10,6 +10,7 @@ This is needed because the data contains NaN, which can't be parsed by the under
 JavaScript JSON parser, but it can be parsed by Python's JSON engine.
 
 """
+
 import os
 import json
 

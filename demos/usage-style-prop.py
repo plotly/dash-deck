@@ -3,6 +3,7 @@ Adapted from: https://pypi.org/project/pydeck/
 
 This demo shows how to resize the map using the `style` prop.
 """
+
 import os
 
 import dash

@@ -4,6 +4,7 @@ Adapted from: https://pydeck.gl/gallery/icon_layer.html
 Location of biergartens in Germany listed on OpenStreetMap as of early 2020.
 
 """
+
 import os
 
 import dash

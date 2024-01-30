@@ -1,6 +1,7 @@
 """
 Adapted from: https://pypi.org/project/pydeck/
 """
+
 import os
 
 import dash

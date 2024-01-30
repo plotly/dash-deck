@@ -11,6 +11,7 @@ Overlaid with the satellite imagery from Mapbox to highlight the how
 terrain affects agriculture.
 
 """
+
 import os
 
 import dash
