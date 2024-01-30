@@ -16,7 +16,7 @@
     "validate-init": "python _validate_init.py",
     "prepublishOnly": "npm run validate-init",
     "build:js": "webpack --mode production",
-    "build:py_and_r": "python C:\\ProgramData\\miniconda3\\envs\\dash\\Scripts\\dash-generate-components.py ./src/lib/components dash_deck -p package-info.json --r-prefix ''",
+    "build:py_and_r": "dash-generate-components ./src/lib/components dash_deck -p package-info.json --r-prefix ''",
     "build:py_and_r-activated": "(. venv/bin/activate || venv\\scripts\\activate && npm run build:py_and_r)",
     "build": "npm run build:js && npm run build:py_and_r",
     "build:activated": "npm run build:js && npm run build:py_and_r-activated"
