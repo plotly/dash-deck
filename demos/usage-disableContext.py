@@ -61,7 +61,11 @@ arc_layer = pdk.Layer(
 )
 
 view_state = pdk.ViewState(
-    latitude=37.7576171, longitude=-122.5776844, bearing=45, pitch=50, zoom=8,
+    latitude=37.7576171,
+    longitude=-122.5776844,
+    bearing=45,
+    pitch=50,
+    zoom=8,
 )
 
 
