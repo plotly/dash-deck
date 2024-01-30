@@ -3,7 +3,7 @@ version: 2
 jobs:
     "node":
         docker:
-            - image: circleci/python:3.7-node
+            - image: cimg/python:3.7-node
               auth:
                   username: dashautomation
                   password: $DASH_PAT_DOCKERHUB
@@ -45,7 +45,7 @@ jobs:
 
     "python-3.6": &test-template
         docker:
-            - image: circleci/python:3.6-stretch-browsers
+            - image: cimg/python:3.6-stretch-browsers
               auth:
                   username: dashautomation
                   password: $DASH_PAT_DOCKERHUB
@@ -107,7 +107,7 @@ jobs:
     "python-3.7":
         <<: *test-template
         docker:
-            - image: circleci/python:3.7-stretch-browsers
+            - image: cimg/python:3.7-stretch-browsers
               auth:
                   username: dashautomation
                   password: $DASH_PAT_DOCKERHUB
