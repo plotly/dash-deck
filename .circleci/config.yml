@@ -118,6 +118,46 @@ jobs:
         environment:
             PERCY_ENABLE: False
 
+    "python-3-9":
+        <<: *test-template
+        docker:
+            - image: cimg/python:3.9-browsers
+              auth:
+                  username: dashautomation
+                  password: $DASH_PAT_DOCKERHUB
+        environment:
+            PERCY_ENABLE: False
+
+    "python-3-10":
+        <<: *test-template
+        docker:
+            - image: cimg/python:3.10-browsers
+              auth:
+                  username: dashautomation
+                  password: $DASH_PAT_DOCKERHUB
+        environment:
+            PERCY_ENABLE: False
+
+    "python-3-11":
+        <<: *test-template
+        docker:
+            - image: cimg/python:3.11-browsers
+              auth:
+                  username: dashautomation
+                  password: $DASH_PAT_DOCKERHUB
+        environment:
+            PERCY_ENABLE: False
+
+    "python-3-12":
+        <<: *test-template
+        docker:
+            - image: cimg/python:3.12-browsers
+              auth:
+                  username: dashautomation
+                  password: $DASH_PAT_DOCKERHUB
+        environment:
+            PERCY_ENABLE: False
+
 
 workflows:
     version: 2
@@ -126,6 +166,14 @@ workflows:
             - "python-3-7":
                 context: dash-docker-hub
             - "python-3-8":
+                context: dash-docker-hub
+            - "python-3-9":
+                context: dash-docker-hub
+            - "python-3-10":
+                context: dash-docker-hub
+            - "python-3-11":
+                context: dash-docker-hub
+            - "python-3-12":
                 context: dash-docker-hub
             - "node":
                 context: dash-docker-hub
