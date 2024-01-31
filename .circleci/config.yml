@@ -5,7 +5,7 @@ orbs:
 jobs:
     "node":
         docker:
-            - image: cimg/python:3.7-node
+            - image: cimg/python:3.12-node
               auth:
                   username: dashautomation
                   password: $DASH_PAT_DOCKERHUB
@@ -45,9 +45,9 @@ jobs:
                 when: always
 
 
-    "python-3-7": &test-template
+    "python-3-8": &test-template
         docker:
-            - image: cimg/python:3.7-browsers
+            - image: cimg/python:3.8-browsers
               auth:
                   username: dashautomation
                   password: $DASH_PAT_DOCKERHUB
@@ -108,16 +108,6 @@ jobs:
                 path: /tmp/dash_artifacts
                 destination: snapshots
 
-    "python-3-8":
-        <<: *test-template
-        docker:
-            - image: cimg/python:3.8-browsers
-              auth:
-                  username: dashautomation
-                  password: $DASH_PAT_DOCKERHUB
-        environment:
-            PERCY_ENABLE: False
-
     "python-3-9":
         <<: *test-template
         docker:
@@ -163,8 +153,6 @@ workflows:
     version: 2
     build:
         jobs:
-            - "python-3-7":
-                context: dash-docker-hub
             - "python-3-8":
                 context: dash-docker-hub
             - "python-3-9":
