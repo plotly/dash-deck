@@ -61,29 +61,29 @@ jobs:
             - browser-tools/install-browser-tools
 
             - restore_cache:
-                key: deps2-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
 
             - run:
                 name: Create virtualenv
                 command: |
-                    python -m venv dash-deck-venv
+                    python -m venv venv
 
             - run:
                 name: Install requirements
                 command: |
-                    . dash-deck-venv/bin/activate
+                    . venv/bin/activate
                     pip install -U pip
                     pip install -r requirements.txt -r tests/requirements.txt -r demos/requirements.txt
 
             - save_cache:
-                key: deps2-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
                 paths:
-                    - "dash-dev-venv"
+                    - "venv"
 
             - run:
                 name: Run black
                 command: |
-                    . dash-deck-venv/bin/activate
+                    . venv/bin/activate
                     black usage* --check
                     black demos --check
                     black tests --check
@@ -92,14 +92,14 @@ jobs:
             - run:
                 name: Rendering Tests
                 command: |
-                    . dash-deck-venv/bin/activate
+                    . venv/bin/activate
                     pytest tests/test_render.py
                 when: always
             
             - run:
                 name: Percy Snapshot Tests
                 command: |
-                    . dash-deck-venv/bin/activate
+                    . venv/bin/activate
                     pytest tests/test_percy.py
                 when: always
                 
