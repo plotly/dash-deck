@@ -74,7 +74,10 @@ poultry = pdk.Layer(
 )
 
 
-r = pdk.Deck(layers=[cattle, poultry], initial_view_state=view,)
+r = pdk.Deck(
+    layers=[cattle, poultry],
+    initial_view_state=view,
+)
 
 app = dash.Dash(__name__)
 

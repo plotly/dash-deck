@@ -71,9 +71,15 @@ tabs = [
             style=styles["tab"],
             children=[
                 html.P("hoverInfo"),
-                html.Pre(id="hover-info-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="hover-info-json-output",
+                    style=styles["json-output"],
+                ),
                 html.P("hoverEvent"),
-                html.Pre(id="hover-event-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="hover-event-json-output",
+                    style=styles["json-output"],
+                ),
             ],
         ),
         label="Hover",
@@ -83,9 +89,15 @@ tabs = [
             style=styles["tab"],
             children=[
                 html.P("clickInfo"),
-                html.Pre(id="click-info-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="click-info-json-output",
+                    style=styles["json-output"],
+                ),
                 html.P("clickEvent"),
-                html.Pre(id="click-event-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="click-event-json-output",
+                    style=styles["json-output"],
+                ),
             ],
         ),
         label="click",
@@ -95,10 +107,14 @@ tabs = [
             style=styles["tab"],
             children=[
                 html.P("dragStartInfo"),
-                html.Pre(id="dragStart-info-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="dragStart-info-json-output",
+                    style=styles["json-output"],
+                ),
                 html.P("dragStartEvent"),
                 html.Pre(
-                    id="dragStart-event-json-output", style=styles["json-output"],
+                    id="dragStart-event-json-output",
+                    style=styles["json-output"],
                 ),
             ],
         ),
@@ -109,9 +125,15 @@ tabs = [
             style=styles["tab"],
             children=[
                 html.P("dragEndInfo"),
-                html.Pre(id="dragEnd-info-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="dragEnd-info-json-output",
+                    style=styles["json-output"],
+                ),
                 html.P("dragEndEvent"),
-                html.Pre(id="dragEnd-event-json-output", style=styles["json-output"],),
+                html.Pre(
+                    id="dragEnd-event-json-output",
+                    style=styles["json-output"],
+                ),
             ],
         ),
         label="dragEnd",

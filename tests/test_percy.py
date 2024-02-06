@@ -52,6 +52,6 @@ def test_percy(dash_duo):
     dash_duo.start_server(app)
 
     for name in imgs:
-        dash_duo.wait_for_page(url="http://127.0.0.1:8050/" + name)
+        dash_duo.wait_for_page(url=dash_duo.server_url + "/" + name)
         time.sleep(2)
         dash_duo.percy_snapshot(name)
