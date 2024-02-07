@@ -33,7 +33,11 @@ bitmap_layer = pdk.Layer(
 )
 
 view_state = pdk.ViewState(
-    latitude=37.7576171, longitude=-122.5776844, zoom=10, bearing=-45, pitch=60,
+    latitude=37.7576171,
+    longitude=-122.5776844,
+    zoom=10,
+    bearing=-45,
+    pitch=60,
 )
 
 r = pdk.Deck(

@@ -42,7 +42,9 @@ view_state = pdk.ViewState(
 
 # Render
 r = pdk.Deck(
-    layers=[layer], initial_view_state=view_state, map_style=pdk.map_styles.SATELLITE,
+    layers=[layer],
+    initial_view_state=view_state,
+    map_style=pdk.map_styles.SATELLITE,
 )
 
 

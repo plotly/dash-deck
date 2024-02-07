@@ -43,7 +43,10 @@ view_state = pdk.ViewState(
 )
 
 # Render
-r = pdk.Deck(layers=[layer], initial_view_state=view_state,)
+r = pdk.Deck(
+    layers=[layer],
+    initial_view_state=view_state,
+)
 
 
 app = dash.Dash(__name__)
