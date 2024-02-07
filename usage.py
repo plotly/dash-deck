@@ -2,6 +2,9 @@ import dash
 import dash_deck
 import dash_html_components as html
 
+import os
+
+mapbox_api_token = os.getenv("MAPBOX_ACCESS_TOKEN")
 
 data = {
     "description": "A minimal deck.gl example rendering a circle with text",
@@ -22,7 +25,7 @@ data = {
 
 app = dash.Dash(__name__)
 
-app.layout = html.Div(dash_deck.DeckGL(data, id="deck-gl"))
+app.layout = html.Div(dash_deck.DeckGL(data, id="deck-gl", mapboxKey=mapbox_api_token))
 
 
 if __name__ == "__main__":
