@@ -7,6 +7,7 @@ The layer aggregates data within the boundary of each hexagon cell.
 
 This example is adapted from the deck.gl documentation.
 """
+
 import os
 
 import dash

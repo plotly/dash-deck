@@ -9,6 +9,7 @@ Since binary transfer relies on Jupyter's kernel communication,
 note that the .html in the pydeck documentation does not use binary transfer
 and is just for illustration.
 """
+
 import os
 
 import dash

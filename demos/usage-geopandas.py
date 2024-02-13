@@ -3,6 +3,7 @@ Adapted from: https://pydeck.gl/gallery/geopandas_integration.html
 
 This demos shows how to use the geopandas library in pydeck and Dash Deck.
 """
+
 import os
 
 import dash

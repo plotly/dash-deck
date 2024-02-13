@@ -73,7 +73,9 @@ TOOLTIP_TEXT = {
     "html": "{S000} jobs <br /> Home of commuter in red; work location in green"
 }
 
-r = pdk.Deck(arc_layer, initial_view_state=view_state, mapbox_key=mapbox_api_token)
+r = pdk.Deck(
+    arc_layer, initial_view_state=view_state, api_keys={"mapbox": mapbox_api_token}
+)
 
 
 app = dash.Dash(__name__)

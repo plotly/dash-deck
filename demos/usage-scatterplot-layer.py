@@ -6,6 +6,7 @@ San Francisco, California.
 
 Adapted from the deck.gl documentation.
 """
+
 import os
 import math
 

@@ -9,6 +9,7 @@ https://observablehq.com/@pessimistress/deck-gl-custom-layer-tutorial
 Registering a custom layer requires some knowledge of JavaScript and bundling.
 See https://github.com/ajduberstein/pydeck_custom_layer for a minimal example layer.
 """
+
 import os
 
 import dash

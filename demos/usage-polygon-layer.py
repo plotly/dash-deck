@@ -5,6 +5,7 @@ Property values in Vancouver, Canada, adapted from the deck.gl example pages.
 This demos luma.gl-based shadows using the LightingEffect effect.
 
 """
+
 import os
 import math
 

@@ -2,6 +2,7 @@ const path = require('path');
 const packagejson = require('./package.json');
 
 const dashLibraryName = packagejson.name.replace(/-/g, '_');
+const webpack = require('webpack');
 
 module.exports = (env, argv) => {
 
@@ -42,6 +43,11 @@ module.exports = (env, argv) => {
     });
 
     return {
+        plugins: [
+          new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1,
+          }),
+        ],
         mode,
         entry,
         output: {

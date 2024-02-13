@@ -5,6 +5,7 @@ Locations of bike parking within San Francisco. Aggregation level
 varies depending on the viewport of the user.
 
 """
+
 import os
 
 import dash

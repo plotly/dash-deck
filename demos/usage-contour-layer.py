@@ -99,7 +99,7 @@ r = pdk.Deck(
     layers=[cattle, poultry],
     initial_view_state=view,
     map_style=pdk.map_styles.SATELLITE,
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
 )
 
 

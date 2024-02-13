@@ -4,6 +4,7 @@ Adapted from: https://pydeck.gl/gallery/bitmap_layer.html
 A 1906 Britton & Rey's map of San Francisco's 1906 fire, overlaid on
 an interactive map of San Francisco.
 """
+
 import os
 
 import dash
@@ -44,7 +45,7 @@ r = pdk.Deck(
     bitmap_layer,
     initial_view_state=view_state,
     map_style=pdk.map_styles.SATELLITE,
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
 )
 
 

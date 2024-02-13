@@ -7,6 +7,7 @@ Choshi-Otaki Falls in Aomori, Japan.
 The full data set is viewable here:
 https://sketchfab.com/3d-models/choshi-otaki-falls-oirase-valley-aomori-ea1ef9e7f82f418ea0776ceb6894ebd1
 """
+
 import os
 
 import dash

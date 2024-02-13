@@ -5,6 +5,7 @@ Plot of values for a particular hex ID in the H3 geohashing scheme.
 
 This example is adapted from the deck.gl documentation.
 """
+
 import os
 
 import dash

@@ -4,6 +4,7 @@ Adapted from: https://pydeck.gl/gallery/geojson_layer.html
 Property values in Vancouver, Canada, adapted from the deck.gl example 
 pages. Input data is in a GeoJSON format.
 """
+
 import os
 
 import dash
@@ -49,7 +50,7 @@ geojson = pydeck.Layer(
 r = pydeck.Deck(
     layers=[polygon, geojson],
     initial_view_state=INITIAL_VIEW_STATE,
-    mapbox_key=mapbox_api_token,
+    api_keys={"mapbox": mapbox_api_token},
 )
 
 

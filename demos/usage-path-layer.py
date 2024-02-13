@@ -4,6 +4,7 @@ Adapted from: https://pydeck.gl/gallery/path_layer.html
 Locations of the Bay Area Rapid Transit lines.
 
 """
+
 import os
 
 import dash
