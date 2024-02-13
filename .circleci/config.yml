@@ -14,7 +14,7 @@ jobs:
             - checkout
 
             - restore_cache:
-                key: deps1-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum ".circleci/config.yml" }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
 
             - run:
                 name: Create virtualenv
@@ -35,7 +35,7 @@ jobs:
                     npm i
 
             - save_cache:
-                key: deps1-{{ .Branch }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
+                key: deps1-{{ .Branch }}-{{ checksum ".circleci/config.yml" }}-{{ checksum "package.json" }}-{{ checksum "tests/requirements.txt" }}-{{ checksum "demos/requirements.txt" }}-{{ checksum "requirements.txt" }}
                 paths:
                     - node_modules
 
