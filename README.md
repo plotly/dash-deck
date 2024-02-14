@@ -212,7 +212,7 @@ The `style` prop is useful for directly changing the CSS of Dash Deck. For examp
 
 ### Callbacks and events
 
-Various events are exposed as read-only props, and you can use them as `Input` or `State` to your callbacks. They are disabled by default in order to maximize performance for cases where a lot of data are passed through `setProps`. 
+Various events are exposed as read-only props, and you can use them as `Input` or `State` to your callbacks. They are disabled by default in order to maximize performance for cases where a lot of data are passed through `setProps`.
 
 To use them, either set `enableEvents` to `True`, or give a list with the gestures that you want to enable. For example, the two following lines are equivalent:
 ```python
@@ -242,8 +242,8 @@ deck_component = dash_deck.DeckGL(
 You can also customize your tooltip:
 ```python
 deck_component = dash_deck.DeckGL(
-    r.to_json(), 
-    id="deck-gl", 
+    r.to_json(),
+    id="deck-gl",
     tooltip={
         "html": ...,
         "style": ...
@@ -268,7 +268,7 @@ import LabeledGeoJsonLayer from "../labeled-geojson-layer.js";
 ```JavaScript
 const configuration = {
   classes: Object.assign(
-    {}, 
+    {},
     ...,
     LabeledGeoJsonLayer
   ),
@@ -312,6 +312,9 @@ You can also give a dictionary specifying an `html` template and custom style us
 information about templating, see: https://pydeck.gl/tooltip.html
 - mapboxKey (string; optional): You will need a mapbox token to use deck.gl. Please create a mapbox
 and follow the instructions here: https://docs.mapbox.com/help/how-mapbox-works/access-tokens/
+- disableContext (boolean; default False): This is a boolean value (e.g. `True`, `False`)  indicating whether or not to disable the default context menu
+that shows up when right clicking on the map. If set to `True`, right clicking to rotate
+a map or adjust its pitch will not trigger the default context menu.
 - clickEvent (dict; optional): Read-only prop. To use this, make sure that `enableEvents` is set to `True`, or that `enableEvents` is a list that contains this event type.
 This prop is updated when an element in the map is clicked. This contains
 the original gesture event (in JSON).
@@ -329,7 +332,7 @@ the picking info describing the object being hovered.
 Complete description here:
 https://deck.gl/docs/developer-guide/interactivity#the-picking-info-object
 - dragStartEvent (dict; optional): Read-only prop. To use this, make sure that `enableEvents` is set to `True`, or that `enableEvents` is a list that contains this event type.
-To use this, make sure that `enableEvents` is set to `True`, or that `enableEvents` is a list that contains this event type. 
+To use this, make sure that `enableEvents` is set to `True`, or that `enableEvents` is a list that contains this event type.
 This prop is updated when the user starts dragging on the canvas. This contains
 the original gesture event (in JSON).
 - dragStartInfo (dict; optional): Read-only prop. To use this, make sure that `enableEvents` is set to `True`, or that `enableEvents` is a list that contains this event type.
