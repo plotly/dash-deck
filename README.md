@@ -1,5 +1,12 @@
 # Dash Deck
 
+<div align="center">
+  <a href="https://dash.plotly.com/project-maintenance">
+    <img src="https://dash.plotly.com/assets/images/maintained-by-plotly.png" width="400px" alt="Maintained by Plotly">
+  </a>
+</div>
+
+
 Dash Deck is a proof of concept library for building 3D interactive maps and graphical visualizations directly in Dash. Built on top of [deck.gl](https://deck.gl/), it supports maps built using [pydeck](https://pydeck.gl/) and deck.gl’s [JSON API](https://deck.gl/playground/).
 
 ![demo](https://raw.githubusercontent.com/plotly/dash-deck/master/images/demo.gif)
